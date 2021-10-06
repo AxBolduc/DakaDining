@@ -8,4 +8,15 @@
     <string name="txtNoAccount">Don\'t have an account?</string>
     <string name="txtSignUp">Sign Up</string>
     <string name="txtLogIn">Log In</string>
+    <string name="txtCreateProfile">Create Profile</string>
+    <string name="txtCreateFirstName">First Name</string>
+    <string name="txtCreateLastName">Last Name</string>
+    <string name="txtCreateEmail">Email</string>
+    <string name="txtMealPlan"><u>Meal Plan</u></string>
+    <string name="txtNineteen">19/week</string>
+    <string name="txtTwoHundred">200/semester</string>
+    <string name="txtFourteen">14/week</string>
+    <string name="txtNone">None</string>
+    <string name="txtChangedMind">Changed your mind?</string>
+    <string name="txtCancel">Cancel</string>
 </resources>
