@@ -8,7 +8,7 @@ import com.bolducsawka.dakadining.fragments.LoginPage
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage.Callbacks{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,5 +19,17 @@ class MainActivity : AppCompatActivity() {
             val fragment = LoginPage.newInstance()
             supportFragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()
         }
+    }
+
+    override fun onCreateUser() {
+        val fragment = CreateProfilePage.newInstance()
+        supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.fragment_container, fragment)
+            .commit()
+    }
+
+    override fun onCancelCreateProfile() {
+        supportFragmentManager.popBackStack()
     }
 }

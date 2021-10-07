@@ -1,6 +1,8 @@
 package com.bolducsawka.dakadining.fragments
 
+import android.content.Context
 import android.os.Bundle
+import android.telecom.Call
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +16,12 @@ import io.realm.mongodb.Credentials
 
 class LoginPage : Fragment() {
 
+    interface Callbacks {
+        fun onCreateUser()
+    }
+
+    private var callbacks: Callbacks? = null
+
     private lateinit var txtInputUsername: EditText
     private lateinit var txtInputPassword: EditText
 
@@ -22,6 +30,11 @@ class LoginPage : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callbacks = context as Callbacks?
     }
 
     override fun onCreateView(
@@ -41,10 +54,19 @@ class LoginPage : Fragment() {
         }
 
         btnSignUp.setOnClickListener {
-            signUp(txtInputUsername.text.toString(), txtInputPassword.text.toString())
+
+            callbacks?.onCreateUser()
+
+
+//            signUp(txtInputUsername.text.toString(), txtInputPassword.text.toString())
         }
 
         return view
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
     }
     
     private fun signUp(user: String, pass: String){

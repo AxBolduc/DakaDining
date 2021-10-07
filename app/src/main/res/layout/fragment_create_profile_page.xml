@@ -212,14 +212,16 @@
             android:text="@string/txtChangedMind"
             android:fontFamily="@font/montserrat"
             android:textSize="15sp"/>
+
         <Button
+            android:id="@+id/btnCreateCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:text="@string/txtCancel"
             android:backgroundTint="#FF0000"
             android:fontFamily="@font/montserrat"
-            android:textStyle="bold"/>
+            android:text="@string/txtCancel"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </FrameLayout>
