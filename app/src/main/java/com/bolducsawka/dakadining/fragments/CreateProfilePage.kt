@@ -6,9 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
+import android.widget.*
 import com.bolducsawka.dakadining.R
+import com.bolducsawka.dakadining.dakaApp
+import com.bolducsawka.dakadining.dataobjects.MealPlan
+import com.bolducsawka.dakadining.dataobjects.User
+import io.realm.mongodb.AppConfiguration
+import org.bson.codecs.configuration.CodecRegistries
+import org.bson.codecs.pojo.PojoCodecProvider
 
 
 class CreateProfilePage : Fragment() {
@@ -19,6 +24,8 @@ class CreateProfilePage : Fragment() {
 
     private var callbacks: Callbacks? = null
 
+    private var meals: String = "None"
+
     private lateinit var txtInputFirstName: EditText;
     private lateinit var txtInputLastName: EditText;
     private lateinit var txtInputEmail: EditText;
@@ -26,6 +33,8 @@ class CreateProfilePage : Fragment() {
 
     private lateinit var btnCreateSignUp: Button
     private lateinit var btnCreateCancel: Button
+
+    private lateinit var spinnerMealPlan: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +59,28 @@ class CreateProfilePage : Fragment() {
         btnCreateSignUp = view.findViewById(R.id.btnCreateSignUp)
         btnCreateCancel = view.findViewById(R.id.btnCreateCancel)
 
+        spinnerMealPlan = view.findViewById(R.id.spinnerMealPlan)
+
+        btnCreateSignUp.setOnClickListener {
+            createUser()
+        }
+
+        spinnerMealPlan.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                when(p0?.selectedItem.toString()){
+                    "19/week" -> meals = "Nineteen"
+                    "14/week" -> meals = "Fourteen"
+                    "200/semester" -> meals = "TwoHundred"
+                    "None" -> meals = "None"
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+        }
+
         btnCreateCancel.setOnClickListener {
             callbacks?.onCancelCreateProfile()
         }
@@ -60,6 +91,35 @@ class CreateProfilePage : Fragment() {
     override fun onDetach() {
         super.onDetach()
         callbacks = null
+    }
+
+    fun createUser(){
+        val client = dakaApp.currentUser()!!.getMongoClient("mongodb-atlas")
+        val database = client.getDatabase("daka-dining")
+
+        val pojoCodecRegistry = CodecRegistries.fromRegistries(
+            AppConfiguration.DEFAULT_BSON_CODEC_REGISTRY,
+            CodecRegistries.fromProviders(
+                PojoCodecProvider.builder().automatic(true).build()
+            )
+        )
+
+        val collection = database.getCollection("User", User::class.java).withCodecRegistry(pojoCodecRegistry)
+        collection?.insertOne(User(
+            txtInputFirstName.text.toString(),
+            txtInputLastName.text.toString(),
+            txtInputEmail.text.toString(),
+            txtInputPassword.text.toString()
+        ))?.getAsync{ task ->
+            if(task.isSuccess){
+                Toast.makeText(context, "Create User success", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(context, "Create User failed", Toast.LENGTH_SHORT).show()
+                task.error.printStackTrace()
+            }
+
+        }
+
     }
 
     companion object {

@@ -8,6 +8,7 @@ import io.realm.log.LogLevel
 import io.realm.log.RealmLog
 import io.realm.mongodb.App
 import io.realm.mongodb.AppConfiguration
+import io.realm.mongodb.Credentials
 
 lateinit var dakaApp: App
 
@@ -27,6 +28,22 @@ class DakaDining: Application() {
 
         if(BuildConfig.DEBUG){
             RealmLog.setLevel(LogLevel.ALL)
+        }
+
+//        dakaApp.loginAsync(Credentials.apiKey("QqFUAL6a7dchHPMWs5rbh5fFAtIRyj9RgjyWwQZI0dPOJ54Oaw2AQrAI97vAnSIQ")){
+//            if(it.isSuccess){
+//                Log.d(TAG, "Login Successful")
+//            }else{
+//                Log.d(TAG, "Login failed")
+//            }
+//        }
+
+        dakaApp.loginAsync(Credentials.anonymous()){
+            if(it.isSuccess){
+                Log.d(TAG, "Login Successful")
+            }else{
+                Log.d(TAG, "Login failed")
+            }
         }
 
         Log.v(TAG, "Initialized the Realm App configuration for: ${dakaApp.configuration.appId}")

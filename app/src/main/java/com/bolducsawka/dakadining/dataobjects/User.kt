@@ -3,11 +3,15 @@ package com.bolducsawka.dakadining.dataobjects
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.Required
+import org.bson.types.ObjectId
+import java.lang.IllegalArgumentException
 
-open class User: RealmObject(){
-    @PrimaryKey
-    lateinit var _id: String
+enum class MealPlan(val numMeals: Int){
+    Nineteen(19),
+    Fourteen(14),
+    TwoHundred(200),
+    None(0)
+}
 
-    @Required
-    lateinit var email: String
+open class User(var firstName: String = "", var lastName: String = "", var email: String = "", var pass: String = ""): RealmObject(){
 }

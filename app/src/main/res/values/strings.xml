@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Daka Dining</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txtLogoDescription">Logo Image</string>
     <string name="txtUsername">Username</string>
@@ -19,4 +18,11 @@
     <string name="txtNone">None</string>
     <string name="txtChangedMind">Changed your mind?</string>
     <string name="txtCancel">Cancel</string>
+
+    <string-array name="arrMealPlans">
+        <item>19/week</item>
+        <item>14/week</item>
+        <item>200/semester</item>
+        <item>None</item>
+    </string-array>
 </resources>

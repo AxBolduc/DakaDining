@@ -54,11 +54,7 @@ class LoginPage : Fragment() {
         }
 
         btnSignUp.setOnClickListener {
-
             callbacks?.onCreateUser()
-
-
-//            signUp(txtInputUsername.text.toString(), txtInputPassword.text.toString())
         }
 
         return view

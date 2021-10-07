@@ -142,62 +142,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <RadioButton
-            android:id="@+id/radioNineteen"
-            android:layout_width="wrap_content"
+
+        <Spinner
+            android:id="@+id/spinnerMealPlan"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:fontFamily="@font/montserrat"
-            android:text="@string/txtNineteen"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:entries="@array/arrMealPlans"
+            app:layout_constraintBottom_toTopOf="@+id/btnCreateSignUp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-        <RadioButton
-            android:id="@+id/radioTwoHundred"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/montserrat"
-            android:text="@string/txtTwoHundred"
-            app:layout_constraintStart_toStartOf="@+id/radioNineteen"
-            app:layout_constraintTop_toBottomOf="@+id/radioNineteen" />
-
-        <RadioButton
-            android:id="@+id/radioFourteen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:fontFamily="@font/montserrat"
-            android:text="@string/txtFourteen"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/radioNineteen" />
-
-        <RadioButton
-            android:id="@+id/radioNone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:text="@string/txtNone"
-            app:layout_constraintStart_toStartOf="@+id/radioFourteen"
-            app:layout_constraintTop_toTopOf="@+id/radioTwoHundred" />
 
         <Button
             android:id="@+id/btnCreateSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:layout_marginBottom="64dp"
+            android:layout_marginBottom="32dp"
             android:backgroundTint="@color/red"
-            android:text="@string/txtSignUp"
             android:fontFamily="@font/montserrat"
-            android:textStyle="bold"
-            android:textSize="30sp"
             android:paddingHorizontal="60dp"
             android:paddingVertical="10dp"
+            android:text="@string/txtSignUp"
+            android:textSize="30sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioTwoHundred" />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
