@@ -73,9 +73,9 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textInputPassword"
+            app:layout_constraintBottom_toBottomOf="@+id/txtInputCreatePassword"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textInputPassword" />
+            app:layout_constraintTop_toTopOf="@+id/txtInputCreatePassword" />
 
 
         <EditText
@@ -112,13 +112,13 @@
             android:layout_marginBottom="4dp"
             android:inputType="textEmailAddress"
             android:textSize="10sp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputPassword"
+            app:layout_constraintBottom_toTopOf="@+id/txtInputCreatePassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/txtInputLastName"
             app:layout_constraintTop_toBottomOf="@+id/txtInputLastName" />
 
         <EditText
-            android:id="@+id/textInputPassword"
+            android:id="@+id/txtInputCreatePassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -182,7 +182,7 @@
             app:layout_constraintTop_toTopOf="@+id/radioTwoHundred" />
 
         <Button
-            android:id="@+id/btnSignUp"
+            android:id="@+id/btnCreateSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"

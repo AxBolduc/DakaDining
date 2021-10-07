@@ -3,11 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Alex/Documents/Classes/CS4518/DakaDining/app/src/main/res/layout/fragment_create_profile_page.xml" value="0.5208333333333334" />
-        <entry key="..\:/Users/Alex/Documents/Classes/CS4518/DakaDining/app/src/main/res/layout/fragment_login_page.xml" value="0.5208333333333334" />
-        <entry key="app/src/main/res/font/montserrat.xml" value="0.3807291666666667" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15172101449275363" />
-        <entry key="app/src/main/res/layout/fragment_login_page.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_create_profile_page.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_login_page.xml" value="0.1" />
       </map>
     </option>
   </component>
@@ -16,12 +13,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.5" />
-      </ProjectState>
-    </option>
   </component>
 </project>

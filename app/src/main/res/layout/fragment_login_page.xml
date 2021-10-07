@@ -73,6 +73,7 @@
         android:layout_gravity="center|bottom">
 
         <Button
+            android:id="@+id/btnLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|bottom"
@@ -96,6 +97,7 @@
                 android:fontFamily="@font/montserrat"
                 android:textSize="15sp"/>
             <Button
+                android:id="@+id/btnSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
