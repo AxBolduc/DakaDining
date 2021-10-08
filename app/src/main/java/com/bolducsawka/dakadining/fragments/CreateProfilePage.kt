@@ -11,10 +11,11 @@ import com.bolducsawka.dakadining.R
 import com.bolducsawka.dakadining.dakaApp
 import com.bolducsawka.dakadining.dataobjects.MealPlan
 import com.bolducsawka.dakadining.dataobjects.User
+import io.realm.Realm
 import io.realm.mongodb.AppConfiguration
+import io.realm.mongodb.Credentials
 import org.bson.codecs.configuration.CodecRegistries
 import org.bson.codecs.pojo.PojoCodecProvider
-
 
 class CreateProfilePage : Fragment() {
 
@@ -94,31 +95,35 @@ class CreateProfilePage : Fragment() {
     }
 
     fun createUser(){
-        val client = dakaApp.currentUser()!!.getMongoClient("mongodb-atlas")
-        val database = client.getDatabase("daka-dining")
+        val user: User?
+        val credentials = Credentials.anonymous();
+        dakaApp.loginAsync(credentials){
+            val client = dakaApp.currentUser()!!.getMongoClient("mongodb-atlas")
+            val database = client.getDatabase("daka-dining")
 
-        val pojoCodecRegistry = CodecRegistries.fromRegistries(
-            AppConfiguration.DEFAULT_BSON_CODEC_REGISTRY,
-            CodecRegistries.fromProviders(
-                PojoCodecProvider.builder().automatic(true).build()
+            val pojoCodecRegistry = CodecRegistries.fromRegistries(
+                AppConfiguration.DEFAULT_BSON_CODEC_REGISTRY,
+                CodecRegistries.fromProviders(
+                    PojoCodecProvider.builder().automatic(true).build()
+                )
             )
-        )
 
-        val collection = database.getCollection("User", User::class.java).withCodecRegistry(pojoCodecRegistry)
-        collection?.insertOne(User(
-            txtInputFirstName.text.toString(),
-            txtInputLastName.text.toString(),
-            txtInputEmail.text.toString(),
-            txtInputPassword.text.toString()
-        ))?.getAsync{ task ->
-            if(task.isSuccess){
-                Toast.makeText(context, "Create User success", Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(context, "Create User failed", Toast.LENGTH_SHORT).show()
-                task.error.printStackTrace()
+            val collection = database.getCollection("User", User::class.java).withCodecRegistry(pojoCodecRegistry)
+            collection?.insertOne(User(
+                txtInputFirstName.text.toString(),
+                txtInputLastName.text.toString(),
+                txtInputEmail.text.toString(),
+                txtInputPassword.text.toString()
+            ))?.getAsync{ task ->
+                if(task.isSuccess){
+                    Toast.makeText(context, "Create User success", Toast.LENGTH_SHORT).show()
+                }else {
+                    Toast.makeText(context, "Create User failed", Toast.LENGTH_SHORT).show()
+                    task.error.printStackTrace()
+                }
             }
-
         }
+
 
     }
 

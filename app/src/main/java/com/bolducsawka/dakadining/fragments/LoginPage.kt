@@ -66,7 +66,6 @@ class LoginPage : Fragment() {
     }
     
     private fun signUp(user: String, pass: String){
-
         btnLogin.isEnabled = false
         btnSignUp.isEnabled = false
         
@@ -83,7 +82,7 @@ class LoginPage : Fragment() {
     }
 
     private fun login(user: String, pass: String){
-        //TODO: Login stuff
+        //TODO: Login stuff redirecting
 
         btnLogin.isEnabled = false
         btnSignUp.isEnabled = false
@@ -100,7 +99,6 @@ class LoginPage : Fragment() {
                 Toast.makeText(context, "Login Success", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
     companion object {
