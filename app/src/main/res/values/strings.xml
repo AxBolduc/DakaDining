@@ -25,6 +25,9 @@
     <string name = "txtNewRequest">New Request</string>
     <string name = "txtSubmitRequest">Submit Request</string>
     <string name = "txtTime">Date/Time</string>
+    <string name = "txtOutgoingRequests">Outgoing Requests</string>
+    <string name = "txtOutgoingOfferings">Outgoing Offerings</string>
+    <string name = "txtUseSwipe">Swipe Used</string>
 
 
     <string-array name="arrMealPlans">
