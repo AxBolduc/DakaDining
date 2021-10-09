@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.CreateSellerProfilePage">
+    tools:context=".fragments.SellerProfilePage">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -35,17 +35,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="top"
         android:layout_marginHorizontal="30dp">
 
         <ImageView
             android:id="@+id/profileSellerImage"
-            android:layout_width="179dp"
-            android:layout_height="157dp"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="30dp"
             android:cropToPadding="true"
             android:scaleType="centerInside"
-            android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -87,6 +87,58 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/txtProfileSellerFirstName"
             app:layout_constraintTop_toBottomOf="@+id/profileSellerCam" />
+
+        <TextView
+            android:id="@+id/numSwipes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center_horizontal"
+            android:text="# Swipes Left"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/txtProfileSellerFirstName"
+            tools:layout_editor_absoluteX="-16dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/txtOutgoingOfferings"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/numSwipes" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/offeringsRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnUseSwipe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <Button
+            android:id="@+id/btnUseSwipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/red"
+            android:fontFamily="@font/montserrat"
+            android:paddingHorizontal="60dp"
+            android:paddingVertical="10dp"
+            android:text="@string/txtUseSwipe"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -98,46 +150,12 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/numSwipes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center_horizontal"
-        android:text="# Swipes Left"
-        android:textColor="@color/black"
-        android:textSize="40sp" />
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="375dp"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/txtOutgoingOfferings"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom">
-        <Button
-            android:id="@+id/btnUseSwipe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:backgroundTint="@color/red"
-            android:fontFamily="@font/montserrat"
-            android:paddingHorizontal="60dp"
-            android:paddingVertical="10dp"
-            android:text="@string/txtUseSwipe"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+
     </LinearLayout>
 
 </FrameLayout>

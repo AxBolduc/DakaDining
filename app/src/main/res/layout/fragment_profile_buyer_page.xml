@@ -41,8 +41,8 @@
 
         <ImageView
             android:id="@+id/profileBuyerImage"
-            android:layout_width="179dp"
-            android:layout_height="157dp"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
             android:layout_marginTop="30dp"
             android:cropToPadding="true"
             android:scaleType="centerInside"
@@ -105,7 +105,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            android:id="@+id/offeringsRecyclerView"
+            android:id="@+id/requestsRecyclerView"
             android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

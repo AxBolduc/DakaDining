@@ -33,7 +33,7 @@ class BuyerProfilePage : Fragment(){
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile_buyer_page, container, false)
 
-        requestsRecyclerView = view.findViewById(R.id.offeringsRecyclerView) as RecyclerView
+        requestsRecyclerView = view.findViewById(R.id.requestsRecyclerView) as RecyclerView
         requestsRecyclerView.layoutManager = LinearLayoutManager(context)
 
         updateUI()

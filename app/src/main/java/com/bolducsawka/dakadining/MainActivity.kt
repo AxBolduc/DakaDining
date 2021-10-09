@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
 
         if(currentFragment == null){
 //            val fragment = LoginPage.newInstance()
-            val fragment = BuyerProfilePage.newInstance()
+            val fragment = SellerProfilePage.newInstance()
             supportFragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()
         }
     }
