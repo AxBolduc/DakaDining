@@ -8,14 +8,12 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
 import android.widget.EditText
-import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import com.bolducsawka.dakadining.R
 import java.util.*
 
-class CreateNewRequestFragment: Fragment() {
+class CreateNewRequestPage: Fragment() {
 
     private lateinit var txtInputNumSwipes: EditText
     private lateinit var txtInputDate: EditText
@@ -77,7 +75,7 @@ class CreateNewRequestFragment: Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            CreateNewRequestFragment().apply {
+            CreateNewRequestPage().apply {
 
             }
     }

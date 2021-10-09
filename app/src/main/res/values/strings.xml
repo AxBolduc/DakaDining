@@ -29,6 +29,7 @@
     <string name = "txtOutgoingOfferings">Outgoing Offerings</string>
     <string name = "txtUseSwipe">Swipe Used</string>
     <string name="txtDate">Date</string>
+    <string name="txtPrice">Price</string>
 
 
     <string-array name="arrMealPlans">

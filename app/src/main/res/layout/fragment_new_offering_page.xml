@@ -58,37 +58,36 @@ tools:context=".fragments.CreateNewOfferingPage">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
-        android:text="@string/txtMoneyOffer"
+        android:text="@string/txtPrice"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/txtInputOfferingPrice"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtInputMoneyOffer" />
+        app:layout_constraintTop_toTopOf="@+id/txtInputOfferingPrice" />
 
     <EditText
         android:id="@+id/txtInputNumSwipes"
-        android:layout_width="168dp"
+        android:layout_width="0dp"
         android:layout_height="33dp"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="4dp"
         android:inputType="number"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtInputMoneyOffer"
+        app:layout_constraintBottom_toTopOf="@+id/txtInputOfferingPrice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txtInputMoneyOffer"
-        android:layout_width="169dp"
-        android:layout_height="31dp"
+        android:id="@+id/txtInputOfferingPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:inputType="numberDecimal"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/txtInputNumSwipes"
         app:layout_constraintTop_toBottomOf="@+id/txtInputNumSwipes" />
 
