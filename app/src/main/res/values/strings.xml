@@ -25,7 +25,7 @@
     <string name = "txtNewRequest">New Request</string>
     <string name = "txtSubmitRequest">Submit Request</string>
     <string name = "txtTime">Time</string>
-    <string name = "txtOutgoingRequests">Outgoing Requests</string>
+    <string name = "txtOutgoingRequests"><u>Outgoing Requests</u></string>
     <string name = "txtOutgoingOfferings">Outgoing Offerings</string>
     <string name = "txtUseSwipe">Swipe Used</string>
     <string name="txtDate">Date</string>

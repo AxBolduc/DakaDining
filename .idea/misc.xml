@@ -3,12 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/layout_bg.xml" value="0.3625" />
         <entry key="app/src/main/res/layout/fragment_create_profile_page.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_login_page.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_new_offering_page.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_new_request_page.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_profile_buyer_page.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/fragment_profile_seller_page.xml" value="0.3421875" />
+        <entry key="app/src/main/res/layout/list_item_request.xml" value="0.5" />
       </map>
     </option>
   </component>
