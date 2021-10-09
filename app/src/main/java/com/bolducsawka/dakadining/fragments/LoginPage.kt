@@ -3,6 +3,7 @@ package com.bolducsawka.dakadining.fragments
 import android.content.Context
 import android.os.Bundle
 import android.telecom.Call
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,18 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.bolducsawka.dakadining.R
+import com.bolducsawka.dakadining.api.BackendFetcher
+import com.bolducsawka.dakadining.api.requestobjects.LoginCredentials
+import com.bolducsawka.dakadining.api.responseobjects.LoginResponse
+import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
 import com.bolducsawka.dakadining.dakaApp
 import com.bolducsawka.dakadining.dataobjects.User
 import io.realm.mongodb.Credentials
+
+private const val TAG = "LoginPage"
 
 class LoginPage : Fragment() {
 
@@ -90,16 +99,25 @@ class LoginPage : Fragment() {
         btnLogin.isEnabled = false
         btnSignUp.isEnabled = false
 
-        //TODO: login logic
-
-        //Create user (dummy user for now)
-        user = User("Alex", "Bolduc", "aebolduc@wpi.edu", "PASS", "Buyer")
-
-        //if logged in successfully
-        user?.let{
-            callbacks?.onUserLoggedIn(it)
-        }
-
+        val loginResponseLiveData: LiveData<ResponseObject<LoginResponse>> = BackendFetcher.get().loginUser(LoginCredentials(email, pass))
+        loginResponseLiveData.observe(viewLifecycleOwner, Observer {
+            if(it.status == 200) {
+                val userResponseLiveData: LiveData<ResponseObject<User>> =
+                    BackendFetcher.get().getUserBySessionID(it.data.sessionID)
+                userResponseLiveData.observe(viewLifecycleOwner, Observer {
+                    if(it.status == 200) {
+                        Log.d(TAG, it.data.toString())
+                        user = it.data
+                        callbacks?.onUserLoggedIn(it.data)
+                    }else{
+                        it.data.message?.let { it1 -> Log.d(TAG, it1) }
+                    }
+                })
+            }
+            else{
+                Log.d(TAG, it.data.message)
+            }
+        })
 
     }
 
