@@ -21,6 +21,7 @@ class CreateProfilePage : Fragment() {
 
     interface Callbacks{
         fun onCancelCreateProfile()
+        fun onProfileCreated(seller: Boolean)
     }
 
     private var callbacks: Callbacks? = null
@@ -95,36 +96,10 @@ class CreateProfilePage : Fragment() {
     }
 
     fun createUser(){
-        val user: User?
-        val credentials = Credentials.anonymous();
-        dakaApp.loginAsync(credentials){
-            val client = dakaApp.currentUser()!!.getMongoClient("mongodb-atlas")
-            val database = client.getDatabase("daka-dining")
+        //TODO: Create user with API
 
-            val pojoCodecRegistry = CodecRegistries.fromRegistries(
-                AppConfiguration.DEFAULT_BSON_CODEC_REGISTRY,
-                CodecRegistries.fromProviders(
-                    PojoCodecProvider.builder().automatic(true).build()
-                )
-            )
-
-            val collection = database.getCollection("User", User::class.java).withCodecRegistry(pojoCodecRegistry)
-            collection?.insertOne(User(
-                txtInputFirstName.text.toString(),
-                txtInputLastName.text.toString(),
-                txtInputEmail.text.toString(),
-                txtInputPassword.text.toString()
-            ))?.getAsync{ task ->
-                if(task.isSuccess){
-                    Toast.makeText(context, "Create User success", Toast.LENGTH_SHORT).show()
-                }else {
-                    Toast.makeText(context, "Create User failed", Toast.LENGTH_SHORT).show()
-                    task.error.printStackTrace()
-                }
-            }
-        }
-
-
+        //Once create user is successful
+        callbacks?.onProfileCreated(true)
     }
 
     companion object {

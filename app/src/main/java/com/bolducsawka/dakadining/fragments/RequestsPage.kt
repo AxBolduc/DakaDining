@@ -1,10 +1,12 @@
 package com.bolducsawka.dakadining.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +18,10 @@ import com.bolducsawka.dakadining.viewmodels.RequestListViewModel
 
 class RequestsPage : Fragment() {
 
+    private lateinit var imgSwapPage: ImageView
+    private lateinit var imgAdd: ImageView
+    private lateinit var imgProfile: ImageView
+
     private lateinit var requestsRecyclerView: RecyclerView
     private var adapter: RequestsPage.RequestAdapter? = null;
 
@@ -23,9 +29,16 @@ class RequestsPage : Fragment() {
         ViewModelProvider(this).get(RequestListViewModel::class.java)
     }
 
+    private var callbacks: OffersPage.Callbacks? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callbacks = context as OffersPage.Callbacks
     }
 
     override fun onCreateView(
@@ -34,8 +47,23 @@ class RequestsPage : Fragment() {
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_requests_page, container, false)
 
+        imgSwapPage = view.findViewById(R.id.imgSwapPage)
+        imgAdd = view.findViewById(R.id.imgAdd)
+        imgProfile = view.findViewById(R.id.imgProfile)
+
         requestsRecyclerView = view.findViewById(R.id.offersRecyclerView) as RecyclerView
         requestsRecyclerView.layoutManager = LinearLayoutManager(context)
+
+        imgSwapPage.setOnClickListener {
+            callbacks?.swapPages(false)
+        }
+        imgAdd.setOnClickListener {
+            callbacks?.onAdd(false)
+        }
+        imgProfile.setOnClickListener {
+            //Determine if the user is a seller or buyer
+            callbacks?.onProfile(true)
+        }
 
         updateUI()
 
@@ -70,6 +98,11 @@ class RequestsPage : Fragment() {
         }
 
         override fun getItemCount(): Int = requestListViewModel.requests.size
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
     }
 
     companion object {

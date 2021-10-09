@@ -3,17 +3,25 @@ package com.bolducsawka.dakadining.fragments
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.bolducsawka.dakadining.R
+import com.bolducsawka.dakadining.navigation.CommonCallbacks
 import java.util.*
 
 class CreateNewRequestPage: Fragment() {
+
+
+    private lateinit var btnBack: ImageView
+    private lateinit var btnSubmitRequest: Button
 
     private lateinit var txtInputNumSwipes: EditText
     private lateinit var txtInputDate: EditText
@@ -23,9 +31,18 @@ class CreateNewRequestPage: Fragment() {
     private lateinit var datePicker: DatePickerDialog
     private lateinit var timePicker: TimePickerDialog
 
+    private var commonCallbacks: CommonCallbacks? = null
+    private var callbacks: CreateNewOfferingPage.Callbacks? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        commonCallbacks = context as CommonCallbacks
+        callbacks = context as CreateNewOfferingPage.Callbacks
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -35,6 +52,9 @@ class CreateNewRequestPage: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_new_request_page, container, false)
+
+        btnBack = view.findViewById(R.id.btnBack)
+        btnSubmitRequest = view.findViewById(R.id.btnSubmitRequest)
 
         txtInputNumSwipes = view.findViewById(R.id.txtInputNumSwipes)
         txtInputDate = view.findViewById(R.id.txtInputDate)
@@ -69,7 +89,21 @@ class CreateNewRequestPage: Fragment() {
 
             timePicker.show()
         }
+
+        btnBack.setOnClickListener {
+            commonCallbacks?.onBack()
+        }
+
+        btnSubmitRequest.setOnClickListener {
+            callbacks?.onNewSubmit(false)
+        }
         return view
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
+        commonCallbacks = null
     }
 
     companion object {

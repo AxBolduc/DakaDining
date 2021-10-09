@@ -1,10 +1,13 @@
 package com.bolducsawka.dakadining.fragments
 
+import android.content.Context
 import android.os.Bundle
+import android.telecom.Call
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +20,16 @@ import com.bolducsawka.dakadining.viewmodels.OfferListViewModel
 
 class OffersPage : Fragment() {
 
+    interface Callbacks{
+        fun swapPages(fromOffers: Boolean)
+        fun onAdd(fromOffers:Boolean)
+        fun onProfile(seller: Boolean)
+    }
+
+    private lateinit var imgSwapPage: ImageView
+    private lateinit var imgAdd: ImageView
+    private lateinit var imgProfile: ImageView
+
     private lateinit var offersRecyclerView: RecyclerView
     private var adapter: OffersPage.OfferAdapter? = null;
 
@@ -24,9 +37,15 @@ class OffersPage : Fragment() {
         ViewModelProvider(this).get(OfferListViewModel::class.java)
     }
 
+    private var callbacks: Callbacks? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callbacks = context as Callbacks
     }
 
     override fun onCreateView(
@@ -35,8 +54,23 @@ class OffersPage : Fragment() {
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_offers_page, container, false)
 
+        imgSwapPage = view.findViewById(R.id.imgSwapPage)
+        imgAdd = view.findViewById(R.id.imgAdd)
+        imgProfile = view.findViewById(R.id.imgProfile)
+
         offersRecyclerView = view.findViewById(R.id.offersRecyclerView) as RecyclerView
         offersRecyclerView.layoutManager = LinearLayoutManager(context)
+
+        imgSwapPage.setOnClickListener {
+            callbacks?.swapPages(true)
+        }
+        imgAdd.setOnClickListener {
+            callbacks?.onAdd(true)
+        }
+        imgProfile.setOnClickListener {
+            //Determine if user is a seller or not
+            callbacks?.onProfile(false)
+        }
 
         updateUI()
 
@@ -71,6 +105,11 @@ class OffersPage : Fragment() {
         }
 
         override fun getItemCount(): Int = offerListViewModel.offers.size
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
     }
 
     companion object {

@@ -1,9 +1,11 @@
 package com.bolducsawka.dakadining.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -11,9 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bolducsawka.dakadining.R
 import com.bolducsawka.dakadining.dataobjects.Offer
+import com.bolducsawka.dakadining.navigation.CommonCallbacks
 import com.bolducsawka.dakadining.viewmodels.OfferListViewModel
 
 class SellerProfilePage : Fragment(){
+
+    private lateinit var btnLogout: ImageView
+    private lateinit var btnBack: ImageView
 
     private lateinit var offersRecyclerView: RecyclerView
     private var adapter: OfferAdapter? = null;
@@ -22,8 +28,15 @@ class SellerProfilePage : Fragment(){
         ViewModelProvider(this).get(OfferListViewModel::class.java)
     }
 
+    private var callbacks: CommonCallbacks? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callbacks = context as CommonCallbacks
     }
 
     override fun onCreateView(
@@ -33,8 +46,19 @@ class SellerProfilePage : Fragment(){
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile_seller_page, container, false)
 
+        btnLogout = view.findViewById(R.id.btnLogout)
+        btnBack = view.findViewById(R.id.btnBack)
+
         offersRecyclerView = view.findViewById(R.id.offeringsRecyclerView) as RecyclerView
         offersRecyclerView.layoutManager = LinearLayoutManager(context)
+
+        btnLogout.setOnClickListener {
+            callbacks?.onLogout()
+        }
+
+        btnBack.setOnClickListener {
+            callbacks?.onBack()
+        }
 
         updateUI()
 
@@ -68,6 +92,11 @@ class SellerProfilePage : Fragment(){
         }
 
         override fun getItemCount(): Int = offerListViewModel.offers.size
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
     }
 
     companion object{

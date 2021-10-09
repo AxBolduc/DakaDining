@@ -18,6 +18,7 @@ class LoginPage : Fragment() {
 
     interface Callbacks {
         fun onCreateUser()
+        fun onUserLoggedIn(seller: Boolean)
     }
 
     private var callbacks: Callbacks? = null
@@ -82,23 +83,16 @@ class LoginPage : Fragment() {
     }
 
     private fun login(user: String, pass: String){
-        //TODO: Login stuff redirecting
 
         btnLogin.isEnabled = false
         btnSignUp.isEnabled = false
 
-        val creds = Credentials.emailPassword(user, pass)
+        //TODO: login logic
 
-        dakaApp.loginAsync(creds){
-            btnLogin.isEnabled = true
-            btnSignUp.isEnabled = true
+        //if logged in successfully
+        callbacks?.onUserLoggedIn(true)
 
-            if(!it.isSuccess){
-                Toast.makeText(context, "Login Failed", Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(context, "Login Success", Toast.LENGTH_SHORT).show()
-            }
-        }
+
     }
 
     companion object {
