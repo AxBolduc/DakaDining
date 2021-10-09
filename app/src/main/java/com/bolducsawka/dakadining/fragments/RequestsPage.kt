@@ -13,10 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bolducsawka.dakadining.R
 import com.bolducsawka.dakadining.dataobjects.Request
+import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.viewmodels.RequestListViewModel
 
+private const val ARG_USER = "user"
 
 class RequestsPage : Fragment() {
+
+    private lateinit var user: User
 
     private lateinit var imgSwapPage: ImageView
     private lateinit var imgAdd: ImageView
@@ -33,6 +37,9 @@ class RequestsPage : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let {
+            user = it.getSerializable(ARG_USER) as User
+        }
 
     }
 
@@ -55,14 +62,14 @@ class RequestsPage : Fragment() {
         requestsRecyclerView.layoutManager = LinearLayoutManager(context)
 
         imgSwapPage.setOnClickListener {
-            callbacks?.swapPages(false)
+            callbacks?.swapPages(user, false)
         }
         imgAdd.setOnClickListener {
             callbacks?.onAdd(false)
         }
         imgProfile.setOnClickListener {
             //Determine if the user is a seller or buyer
-            callbacks?.onProfile(true)
+            callbacks?.onProfile(user)
         }
 
         updateUI()
@@ -107,8 +114,11 @@ class RequestsPage : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(user: User?) =
             RequestsPage().apply {
+                arguments = Bundle().apply {
+                    putSerializable(ARG_USER, user)
+                }
 
             }
     }

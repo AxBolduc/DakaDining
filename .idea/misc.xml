@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/layout_bar.xml" value="0.3625" />
         <entry key="app/src/main/res/drawable/layout_bg.xml" value="0.3625" />
+        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.213768115942029" />
         <entry key="app/src/main/res/layout/fragment_create_profile_page.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_fulfill_request_page.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_login_page.xml" value="0.1" />

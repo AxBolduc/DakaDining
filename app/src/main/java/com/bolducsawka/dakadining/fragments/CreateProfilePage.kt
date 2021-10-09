@@ -8,21 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.bolducsawka.dakadining.R
-import com.bolducsawka.dakadining.dakaApp
-import com.bolducsawka.dakadining.dataobjects.MealPlan
 import com.bolducsawka.dakadining.dataobjects.User
-import io.realm.Realm
-import io.realm.mongodb.AppConfiguration
-import io.realm.mongodb.Credentials
-import org.bson.codecs.configuration.CodecRegistries
-import org.bson.codecs.pojo.PojoCodecProvider
+
+private const val ARG_USER = "user"
 
 class CreateProfilePage : Fragment() {
 
     interface Callbacks{
         fun onCancelCreateProfile()
-        fun onProfileCreated(seller: Boolean)
+        fun onProfileCreated(user: User)
     }
+
+    private var user: User? = null
 
     private var callbacks: Callbacks? = null
 
@@ -98,15 +95,23 @@ class CreateProfilePage : Fragment() {
     fun createUser(){
         //TODO: Create user with API
 
+        user = User(txtInputFirstName.text.toString(),
+            txtInputLastName.text.toString(),
+            txtInputEmail.text.toString(),
+            txtInputPassword.text.toString(),
+            "Seller")
+
+
         //Once create user is successful
-        callbacks?.onProfileCreated(true)
+        user?.let {
+            callbacks?.onProfileCreated(it)
+        }
     }
 
     companion object {
         @JvmStatic
         fun newInstance() =
             CreateProfilePage().apply {
-
             }
     }
 }

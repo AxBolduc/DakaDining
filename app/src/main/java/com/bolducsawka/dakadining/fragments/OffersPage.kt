@@ -15,16 +15,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bolducsawka.dakadining.R
 import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.dataobjects.Request
+import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.viewmodels.OfferListViewModel
 
+private const val ARG_USER = "user"
 
 class OffersPage : Fragment() {
 
     interface Callbacks{
-        fun swapPages(fromOffers: Boolean)
+        fun swapPages(user: User, fromOffers: Boolean)
         fun onAdd(fromOffers:Boolean)
-        fun onProfile(seller: Boolean)
+        fun onProfile(user: User)
     }
+
+    private lateinit var user: User
 
     private lateinit var imgSwapPage: ImageView
     private lateinit var imgAdd: ImageView
@@ -41,6 +45,9 @@ class OffersPage : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let {
+            user = it.getSerializable(ARG_USER)as User
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -62,14 +69,14 @@ class OffersPage : Fragment() {
         offersRecyclerView.layoutManager = LinearLayoutManager(context)
 
         imgSwapPage.setOnClickListener {
-            callbacks?.swapPages(true)
+            callbacks?.swapPages(user, true)
         }
         imgAdd.setOnClickListener {
             callbacks?.onAdd(true)
         }
         imgProfile.setOnClickListener {
             //Determine if user is a seller or not
-            callbacks?.onProfile(false)
+            callbacks?.onProfile(user)
         }
 
         updateUI()
@@ -114,9 +121,11 @@ class OffersPage : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(user: User) =
             OffersPage().apply {
-
+                arguments = Bundle().apply {
+                    putSerializable(ARG_USER, user)
+                }
             }
     }
 }

@@ -12,14 +12,17 @@ import android.widget.EditText
 import android.widget.Toast
 import com.bolducsawka.dakadining.R
 import com.bolducsawka.dakadining.dakaApp
+import com.bolducsawka.dakadining.dataobjects.User
 import io.realm.mongodb.Credentials
 
 class LoginPage : Fragment() {
 
     interface Callbacks {
         fun onCreateUser()
-        fun onUserLoggedIn(seller: Boolean)
+        fun onUserLoggedIn(user: User)
     }
+
+    private var user: User? = null
 
     private var callbacks: Callbacks? = null
 
@@ -82,15 +85,20 @@ class LoginPage : Fragment() {
         }
     }
 
-    private fun login(user: String, pass: String){
+    private fun login(email: String, pass: String){
 
         btnLogin.isEnabled = false
         btnSignUp.isEnabled = false
 
         //TODO: login logic
 
+        //Create user (dummy user for now)
+        user = User("Alex", "Bolduc", "aebolduc@wpi.edu", "PASS", "Buyer")
+
         //if logged in successfully
-        callbacks?.onUserLoggedIn(true)
+        user?.let{
+            callbacks?.onUserLoggedIn(it)
+        }
 
 
     }

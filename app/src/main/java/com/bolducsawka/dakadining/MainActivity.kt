@@ -4,13 +4,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.bolducsawka.dakadining.dataobjects.Offer
+import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.fragments.*
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
 
 class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage.Callbacks, OffersPage.Callbacks, CreateNewOfferingPage.Callbacks,  CommonCallbacks{
+
+    private lateinit var tempUser: User
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        tempUser = User("Alex", "Bolduc", "aebolduc@wpi.edu", "PASS", "Buyer")
 
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
@@ -28,12 +34,12 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
             .commit()
     }
 
-    override fun onUserLoggedIn(seller: Boolean) {
+    override fun onUserLoggedIn(user: User) {
         var fragment: Fragment? = null;
-        if(seller){
-             fragment = RequestsPage.newInstance()
+        if(user.role.equals("Seller")){
+             fragment = RequestsPage.newInstance(user)
         }else{
-             fragment = OffersPage.newInstance()
+             fragment = OffersPage.newInstance(user)
         }
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)
@@ -45,12 +51,12 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
         supportFragmentManager.popBackStack()
     }
 
-    override fun onProfileCreated(seller: Boolean) {
+    override fun onProfileCreated(user: User) {
         var fragment: Fragment? = null;
-        if(seller){
-            fragment = RequestsPage.newInstance()
+        if(user.role.equals("Seller")){
+            fragment = RequestsPage.newInstance(user)
         }else{
-            fragment = OffersPage.newInstance()
+            fragment = OffersPage.newInstance(user)
         }
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)
@@ -58,12 +64,12 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
             .commit()
     }
 
-    override fun swapPages(fromOffers: Boolean) {
+    override fun swapPages(user: User, fromOffers: Boolean) {
         var fragment: Fragment? = null;
         if(fromOffers){
-            fragment = RequestsPage.newInstance()
+            fragment = RequestsPage.newInstance(user)
         }else{
-            fragment = OffersPage.newInstance()
+            fragment = OffersPage.newInstance(user)
         }
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)
@@ -84,9 +90,9 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
             .commit()
     }
 
-    override fun onProfile(seller: Boolean) {
+    override fun onProfile(user: User) {
         var fragment: Fragment? = null;
-        if(seller){
+        if(user.role.equals("Seller")){
             fragment = SellerProfilePage.newInstance()
         }else{
             fragment = BuyerProfilePage.newInstance()
@@ -111,15 +117,6 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
     }
 
     override fun onNewSubmit(fromOffering: Boolean) {
-        var fragment: Fragment? = null;
-        if(fromOffering){
-            fragment = OffersPage.newInstance()
-        }else{
-            fragment = RequestsPage.newInstance()
-        }
-        supportFragmentManager.beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.fragment_container, fragment)
-            .commit()
+        supportFragmentManager.popBackStack()
     }
 }
