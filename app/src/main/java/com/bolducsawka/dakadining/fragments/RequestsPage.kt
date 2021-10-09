@@ -1,11 +1,11 @@
 package com.bolducsawka.dakadining.fragments
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,10 +13,11 @@ import com.bolducsawka.dakadining.R
 import com.bolducsawka.dakadining.dataobjects.Request
 import com.bolducsawka.dakadining.viewmodels.RequestListViewModel
 
-class BuyerProfilePage : Fragment(){
+
+class RequestsPage : Fragment() {
 
     private lateinit var requestsRecyclerView: RecyclerView
-    private var adapter: RequestAdapter? = null;
+    private var adapter: RequestsPage.RequestAdapter? = null;
 
     private val requestListViewModel: RequestListViewModel by lazy {
         ViewModelProvider(this).get(RequestListViewModel::class.java)
@@ -24,16 +25,16 @@ class BuyerProfilePage : Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_profile_buyer_page, container, false)
+        val view =  inflater.inflate(R.layout.fragment_requests_page, container, false)
 
-        requestsRecyclerView = view.findViewById(R.id.requestRecyclerView) as RecyclerView
+        requestsRecyclerView = view.findViewById(R.id.offersRecyclerView) as RecyclerView
         requestsRecyclerView.layoutManager = LinearLayoutManager(context)
 
         updateUI()
@@ -71,11 +72,11 @@ class BuyerProfilePage : Fragment(){
         override fun getItemCount(): Int = requestListViewModel.requests.size
     }
 
-    companion object{
+    companion object {
+        @JvmStatic
         fun newInstance() =
-            BuyerProfilePage().apply {
+            RequestsPage().apply {
 
             }
     }
-
 }

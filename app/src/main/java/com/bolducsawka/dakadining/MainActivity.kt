@@ -2,6 +2,7 @@ package com.bolducsawka.dakadining
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.fragments.*
 
 class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage.Callbacks{
@@ -13,7 +14,7 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
 
         if(currentFragment == null){
 //            val fragment = LoginPage.newInstance()
-            val fragment = SellerProfilePage.newInstance()
+            val fragment = OffersPage.newInstance()
             supportFragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()
         }
     }

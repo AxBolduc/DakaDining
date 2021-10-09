@@ -18,16 +18,16 @@
     <string name="txtNone">None</string>
     <string name="txtChangedMind">Changed your mind?</string>
     <string name="txtCancel">Cancel</string>
-    <string name = "txtNewOffering">New Offering</string>
-    <string name = "txtNumSwipes"># of Swipes</string>
-    <string name = "txtMoneyOffer">For How Much? $</string>
-    <string name = "txtSubmitOffering">Submit Offering</string>
-    <string name = "txtNewRequest">New Request</string>
-    <string name = "txtSubmitRequest">Submit Request</string>
-    <string name = "txtTime">Time</string>
-    <string name = "txtOutgoingRequests"><u>Outgoing Requests</u></string>
-    <string name = "txtOutgoingOfferings">Outgoing Offerings</string>
-    <string name = "txtUseSwipe">Swipe Used</string>
+    <string name="txtNewOffering">New Offering</string>
+    <string name="txtNumSwipes"># of Swipes</string>
+    <string name="txtMoneyOffer">For How Much? $</string>
+    <string name="txtSubmitOffering">Submit Offering</string>
+    <string name="txtNewRequest">New Request</string>
+    <string name="txtSubmitRequest">Submit Request</string>
+    <string name="txtTime">Time</string>
+    <string name="txtOutgoingRequests"><u>Outgoing Requests</u></string>
+    <string name="txtOutgoingOfferings">Outgoing Offerings</string>
+    <string name="txtUseSwipe">Swipe Used</string>
     <string name="txtDate">Date</string>
     <string name="txtPrice">Price</string>
 
