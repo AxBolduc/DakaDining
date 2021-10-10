@@ -101,7 +101,11 @@ class CreateProfilePage : Fragment() {
         callbacks = null
     }
 
-    fun createUser(){
+    private fun createUser(){
+
+        btnCreateSignUp.isEnabled = false
+        btnCreateCancel.isEnabled = false
+
         var role = "Seller"
 
         if(meals == 0){
@@ -132,7 +136,9 @@ class CreateProfilePage : Fragment() {
                 })
             }
             else{
-                Log.d(TAG, it.data.message)
+                Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
+                btnCreateSignUp.isEnabled = true;
+                btnCreateCancel.isEnabled = true;
             }
         })
 

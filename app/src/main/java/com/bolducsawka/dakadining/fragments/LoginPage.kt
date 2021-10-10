@@ -84,22 +84,24 @@ class LoginPage : Fragment() {
         btnSignUp.isEnabled = false
 
         val loginResponseLiveData: LiveData<ResponseObject<LoginResponse>> = BackendFetcher.get().loginUser(LoginCredentials(email, pass))
-        loginResponseLiveData.observe(viewLifecycleOwner, Observer {
-            if(it.status == 200) {
+        loginResponseLiveData.observe(viewLifecycleOwner, Observer { loginResponse ->
+            if(loginResponse.status == 200) {
                 val userResponseLiveData: LiveData<ResponseObject<User>> =
-                    BackendFetcher.get().getUserBySessionID(it.data.sessionID)
-                userResponseLiveData.observe(viewLifecycleOwner, Observer {
-                    if(it.status == 200) {
-                        Log.d(TAG, it.data.toString())
-                        user = it.data
-                        callbacks?.onUserLoggedIn(it.data)
+                    BackendFetcher.get().getUserBySessionID(loginResponse.data.sessionID)
+                userResponseLiveData.observe(viewLifecycleOwner, Observer { userResponse ->
+                    if(userResponse.status == 200) {
+                        Log.d(TAG, userResponse.data.toString())
+                        user = userResponse.data
+                        callbacks?.onUserLoggedIn(userResponse.data)
                     }else{
-                        it.data.message?.let { it1 -> Log.d(TAG, it1) }
+                        Toast.makeText(context, userResponse.data.message, Toast.LENGTH_SHORT).show()
                     }
                 })
             }
             else{
-                Log.d(TAG, it.data.message)
+                Toast.makeText(context, loginResponse.data.message, Toast.LENGTH_SHORT).show()
+                btnSignUp.isEnabled = true
+                btnLogin.isEnabled = true
             }
         })
 
