@@ -13,13 +13,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bolducsawka.dakadining.R
 import com.bolducsawka.dakadining.dataobjects.Request
+import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
 import com.bolducsawka.dakadining.viewmodels.RequestListViewModel
 
+private const val ARG_USER = "user"
+
 class BuyerProfilePage : Fragment(){
+
+    private lateinit var user: User
 
     private lateinit var btnLogout: ImageView
     private lateinit var btnBack: ImageView
+
+    private lateinit var txtBuyerName: TextView
 
     private lateinit var requestsRecyclerView: RecyclerView
     private var adapter: RequestAdapter? = null;
@@ -32,6 +39,9 @@ class BuyerProfilePage : Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let {
+            user = it.getSerializable(ARG_USER) as User
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -48,6 +58,7 @@ class BuyerProfilePage : Fragment(){
 
         btnLogout = view.findViewById(R.id.btnLogout)
         btnBack = view.findViewById(R.id.btnBack)
+        txtBuyerName = view.findViewById(R.id.txtBuyerName)
 
         requestsRecyclerView = view.findViewById(R.id.requestRecyclerView) as RecyclerView
         requestsRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -58,6 +69,10 @@ class BuyerProfilePage : Fragment(){
         btnBack.setOnClickListener {
             callbacks?.onBack()
         }
+
+        //Populate Name fields
+        txtBuyerName.setText("${user.firstName} ${user.lastName}")
+
 
         updateUI()
 
@@ -100,9 +115,11 @@ class BuyerProfilePage : Fragment(){
     }
 
     companion object{
-        fun newInstance() =
+        fun newInstance(user: User) =
             BuyerProfilePage().apply {
-
+                arguments = Bundle().apply {
+                    putSerializable(ARG_USER, user)
+                }
             }
     }
 

@@ -13,11 +13,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bolducsawka.dakadining.R
 import com.bolducsawka.dakadining.dataobjects.Offer
+import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
 import com.bolducsawka.dakadining.viewmodels.OfferListViewModel
 
+private const val ARG_USER = "user"
+
 class SellerProfilePage : Fragment(){
 
+    private lateinit var user: User
+
+    private lateinit var txtSellerName: TextView
     private lateinit var btnLogout: ImageView
     private lateinit var btnBack: ImageView
 
@@ -32,6 +38,9 @@ class SellerProfilePage : Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let {
+            user = it.getSerializable(ARG_USER) as User
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -48,6 +57,8 @@ class SellerProfilePage : Fragment(){
 
         btnLogout = view.findViewById(R.id.btnLogout)
         btnBack = view.findViewById(R.id.btnBack)
+        txtSellerName = view.findViewById(R.id.txtSellerName)
+
 
         offersRecyclerView = view.findViewById(R.id.offeringsRecyclerView) as RecyclerView
         offersRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -59,6 +70,9 @@ class SellerProfilePage : Fragment(){
         btnBack.setOnClickListener {
             callbacks?.onBack()
         }
+
+        //Populate name fields
+        txtSellerName.setText("${user.firstName} ${user.lastName}")
 
         updateUI()
 
@@ -100,9 +114,11 @@ class SellerProfilePage : Fragment(){
     }
 
     companion object{
-        fun newInstance() =
+        fun newInstance(user: User) =
             SellerProfilePage().apply {
-
+                arguments = Bundle().apply {
+                    putSerializable(ARG_USER, user)
+                }
             }
     }
 

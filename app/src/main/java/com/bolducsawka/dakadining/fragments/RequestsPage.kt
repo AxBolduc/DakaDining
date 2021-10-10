@@ -118,7 +118,7 @@ class RequestsPage : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(user: User?) =
+        fun newInstance(user: User) =
             RequestsPage().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_USER, user)

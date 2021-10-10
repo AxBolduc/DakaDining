@@ -61,31 +61,17 @@
             app:layout_constraintTop_toBottomOf="@+id/profileSellerImage" />
 
         <TextView
-            android:id="@+id/txtProfileSellerFirstName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/montserrat"
-            android:text="First Name"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileSellerCam" />
-
-        <TextView
-            android:id="@+id/txtProfileSellerLastName"
+            android:id="@+id/txtSellerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="Last Name"
+            android:text="Name"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/txtProfileSellerFirstName"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileSellerCam" />
 
         <TextView
@@ -98,7 +84,7 @@
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/txtProfileSellerFirstName"
+            app:layout_constraintTop_toBottomOf="@+id/txtSellerName"
             tools:layout_editor_absoluteX="-16dp" />
 
         <TextView

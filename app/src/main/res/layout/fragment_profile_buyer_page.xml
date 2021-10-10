@@ -61,31 +61,17 @@
             app:layout_constraintTop_toBottomOf="@+id/profileBuyerImage" />
 
         <TextView
-            android:id="@+id/txtProfileBuyerFirstName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/montserrat"
-            android:text="First Name"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileBuyerCam" />
-
-        <TextView
-            android:id="@+id/txtProfileBuyerLastName"
+            android:id="@+id/txtBuyerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="Last Name"
+            android:text="Name"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/txtProfileBuyerFirstName"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileBuyerCam" />
 
         <TextView
@@ -99,7 +85,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtProfileBuyerFirstName" />
+            app:layout_constraintTop_toBottomOf="@+id/txtBuyerName" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"

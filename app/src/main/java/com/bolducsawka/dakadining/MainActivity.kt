@@ -96,9 +96,9 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
     override fun onProfile(user: User) {
         var fragment: Fragment? = null;
         if(user.role.equals("Seller")){
-            fragment = SellerProfilePage.newInstance()
+            fragment = SellerProfilePage.newInstance(user)
         }else{
-            fragment = BuyerProfilePage.newInstance()
+            fragment = BuyerProfilePage.newInstance(user)
         }
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)
