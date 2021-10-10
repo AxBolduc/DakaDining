@@ -32,7 +32,7 @@ class CreateProfilePage : Fragment() {
 
     private var callbacks: Callbacks? = null
 
-    private var meals: String = "None"
+    private var meals: Int = 0
 
     private lateinit var txtInputFirstName: EditText;
     private lateinit var txtInputLastName: EditText;
@@ -76,10 +76,10 @@ class CreateProfilePage : Fragment() {
         spinnerMealPlan.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 when(p0?.selectedItem.toString()){
-                    "19/week" -> meals = "Nineteen"
-                    "14/week" -> meals = "Fourteen"
-                    "200/semester" -> meals = "TwoHundred"
-                    "None" -> meals = "None"
+                    "19/week" -> meals = 19
+                    "14/week" -> meals = 14
+                    "200/semester" -> meals = 200
+                    "None" -> meals = 0
                 }
             }
 
@@ -102,15 +102,19 @@ class CreateProfilePage : Fragment() {
     }
 
     fun createUser(){
-        //TODO: Create user with API
+        var role = "Seller"
+
+        if(meals == 0){
+            role = "Buyer"
+        }
 
         val tempUser = CreateUserRequest(txtInputFirstName.text.toString(),
             txtInputLastName.text.toString(),
             txtInputEmail.text.toString(),
             txtInputPassword.text.toString(),
-            10,
-            19,
-            "Seller")
+            meals,
+            meals,
+            role)
 
         val createUserLiveData: LiveData<ResponseObject<LoginResponse>> = BackendFetcher.get().createUser(tempUser)
         createUserLiveData.observe(viewLifecycleOwner, Observer {
