@@ -111,10 +111,12 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
     }
 
     override fun onLogout() {
-        //User instance cleared out
+        for (i in 0..supportFragmentManager.backStackEntryCount){
+            supportFragmentManager.popBackStack()
+        }
+
         val fragment = LoginPage.newInstance()
         supportFragmentManager.beginTransaction()
-            .addToBackStack(null)
             .replace(R.id.fragment_container, fragment)
             .commit()
     }
