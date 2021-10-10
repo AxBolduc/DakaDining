@@ -6,9 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bolducsawka.dakadining.api.requestobjects.CreateUserRequest
 import com.bolducsawka.dakadining.api.requestobjects.LoginCredentials
+import com.bolducsawka.dakadining.api.requestobjects.UpdatePictureRequest
 import com.bolducsawka.dakadining.api.responseobjects.LoginResponse
 import com.bolducsawka.dakadining.api.responseobjects.MealsUpdateReponse
 import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
+import com.bolducsawka.dakadining.api.responseobjects.UpdatePictureResponse
 import com.bolducsawka.dakadining.dataobjects.User
 import retrofit2.Call
 import retrofit2.Callback
@@ -107,6 +109,31 @@ class BackendFetcher private constructor(context: Context){
 
             override fun onFailure(call: Call<ResponseObject<MealsUpdateReponse>>, t: Throwable) {
                 Log.d(TAG, "UpdateMealsBySessionID Failed")
+            }
+
+        })
+
+        return responseLiveData
+    }
+
+    fun updateProfilePicture(updatePictureRequest: UpdatePictureRequest): LiveData<ResponseObject<UpdatePictureResponse>>{
+        val responseLiveData: MutableLiveData<ResponseObject<UpdatePictureResponse>> = MutableLiveData()
+        val backendRequest: Call<ResponseObject<UpdatePictureResponse>> = dakaBackend.updateProfilePicture(updatePictureRequest)
+
+        backendRequest.enqueue(object : Callback<ResponseObject<UpdatePictureResponse>>{
+            override fun onResponse(
+                call: Call<ResponseObject<UpdatePictureResponse>>,
+                response: Response<ResponseObject<UpdatePictureResponse>>
+            ) {
+                responseLiveData.value = response.body()
+            }
+
+            override fun onFailure(
+                call: Call<ResponseObject<UpdatePictureResponse>>,
+                t: Throwable
+            ) {
+                Log.d(TAG, "updateProfilePicture failed")
+                t.printStackTrace()
             }
 
         })

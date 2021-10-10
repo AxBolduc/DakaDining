@@ -31,10 +31,18 @@ import com.bolducsawka.dakadining.navigation.CommonCallbacks
 import com.bolducsawka.dakadining.viewmodels.OfferListViewModel
 import android.R.attr.bitmap
 import android.util.Base64
+import android.util.Log
+import com.bolducsawka.dakadining.api.requestobjects.UpdatePictureRequest
+import com.bolducsawka.dakadining.api.responseobjects.UpdatePictureResponse
 import java.io.ByteArrayOutputStream
+import android.graphics.BitmapFactory
+
+
+
 
 
 private const val ARG_USER = "user"
+private const val TAG = "SellerProfilePage"
 
 class SellerProfilePage : Fragment(){
 
@@ -82,6 +90,11 @@ class SellerProfilePage : Fragment(){
         txtNumSwipes = view.findViewById(R.id.txtNumSwipes)
         imgProfilePic = view.findViewById(R.id.imgProfilePic)
 
+        user.profilePic?.let {
+            val decodedString: ByteArray = Base64.decode(it, Base64.DEFAULT)
+            val decodedByte: Bitmap= BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            imgProfilePic.setImageBitmap(decodedByte)
+        }
 
         offersRecyclerView = view.findViewById(R.id.offeringsRecyclerView) as RecyclerView
         offersRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -188,6 +201,18 @@ class SellerProfilePage : Fragment(){
             val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
 
             val encoded: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
+
+            val profilePicLiveData: LiveData<ResponseObject<UpdatePictureResponse>> = BackendFetcher.get().updateProfilePicture(
+                UpdatePictureRequest(user.session, encoded)
+            )
+
+            profilePicLiveData.observe(viewLifecycleOwner, Observer {
+                if(it.status == 200){
+                    Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
+                }
+            })
 
         }
     }

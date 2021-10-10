@@ -34,4 +34,5 @@ data class User(
     val plan: Int,
     val role: String,
     val session: String,
-    val message: String?):Serializable, ResponseData
+    val message: String?,
+    val profilePic: String?):Serializable, ResponseData
