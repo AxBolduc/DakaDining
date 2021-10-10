@@ -61,7 +61,7 @@ class RequestsPage : Fragment() {
         requestsRecyclerView = view.findViewById(R.id.offersRecyclerView) as RecyclerView
         requestsRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        if(user.role != "Seller"){
+        if(user.role == "Seller"){
             imgAdd.visibility = View.INVISIBLE
         }
 

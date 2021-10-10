@@ -68,7 +68,7 @@ class OffersPage : Fragment() {
         offersRecyclerView = view.findViewById(R.id.offersRecyclerView) as RecyclerView
         offersRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        if(user.role != "Buyer"){
+        if(user.role == "Buyer"){
             imgAdd.visibility = View.INVISIBLE
         }
 
