@@ -77,22 +77,6 @@ class LoginPage : Fragment() {
         super.onDetach()
         callbacks = null
     }
-    
-    private fun signUp(user: String, pass: String){
-        btnLogin.isEnabled = false
-        btnSignUp.isEnabled = false
-        
-        dakaApp.emailPassword.registerUserAsync(user, pass){
-            btnLogin.isEnabled = true
-            btnSignUp.isEnabled = true
-            
-            if(!it.isSuccess){
-                Toast.makeText(context, "Registration failed", Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(context, "Registration Success", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 
     private fun login(email: String, pass: String){
 

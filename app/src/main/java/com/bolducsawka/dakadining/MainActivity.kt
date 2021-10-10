@@ -11,15 +11,10 @@ import com.bolducsawka.dakadining.navigation.CommonCallbacks
 
 class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage.Callbacks, OffersPage.Callbacks, CreateNewOfferingPage.Callbacks,  CommonCallbacks{
 
-    private lateinit var tempUser: User
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         BackendFetcher.initialize(this)
-
-        tempUser = User("12", "alex", "bolduc", "aebolduc@wpi.edu", "PASS", 10, 19, "Seller", null)
 
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
 

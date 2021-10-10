@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.bolducsawka.dakadining.api.requestobjects.CreateUserRequest
 import com.bolducsawka.dakadining.api.requestobjects.LoginCredentials
 import com.bolducsawka.dakadining.api.responseobjects.LoginResponse
+import com.bolducsawka.dakadining.api.responseobjects.MealsUpdateReponse
 import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
 import com.bolducsawka.dakadining.dataobjects.User
 import retrofit2.Call
@@ -81,6 +82,33 @@ class BackendFetcher private constructor(context: Context){
                 Log.d(TAG, "createUser request failed")
                 t.printStackTrace()
             }
+        })
+
+        return responseLiveData
+    }
+
+    fun updateMealsBySessionID(sessionID: String, isIncreasing: Boolean, changeBy: Int): LiveData<ResponseObject<MealsUpdateReponse>>{
+        var direction = "dec"
+
+        if(isIncreasing){
+            direction = "inc"
+        }
+
+        val responseLiveData: MutableLiveData<ResponseObject<MealsUpdateReponse>> = MutableLiveData()
+        val backendRequest: Call<ResponseObject<MealsUpdateReponse>> = dakaBackend.updateMealsBySessionID(sessionID, direction, changeBy)
+
+        backendRequest.enqueue(object : Callback<ResponseObject<MealsUpdateReponse>>{
+            override fun onResponse(
+                call: Call<ResponseObject<MealsUpdateReponse>>,
+                response: Response<ResponseObject<MealsUpdateReponse>>
+            ) {
+                responseLiveData.value = response.body()
+            }
+
+            override fun onFailure(call: Call<ResponseObject<MealsUpdateReponse>>, t: Throwable) {
+                Log.d(TAG, "UpdateMealsBySessionID Failed")
+            }
+
         })
 
         return responseLiveData

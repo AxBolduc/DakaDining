@@ -5,13 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bolducsawka.dakadining.R
+import com.bolducsawka.dakadining.api.BackendFetcher
+import com.bolducsawka.dakadining.api.responseobjects.MealsUpdateReponse
+import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
 import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
@@ -24,8 +31,10 @@ class SellerProfilePage : Fragment(){
     private lateinit var user: User
 
     private lateinit var txtSellerName: TextView
+    private lateinit var txtNumSwipes: TextView
     private lateinit var btnLogout: ImageView
     private lateinit var btnBack: ImageView
+    private lateinit var btnUseSwipe: Button
 
     private lateinit var offersRecyclerView: RecyclerView
     private var adapter: OfferAdapter? = null;
@@ -33,6 +42,7 @@ class SellerProfilePage : Fragment(){
     private val offerListViewModel: OfferListViewModel by lazy {
         ViewModelProvider(this).get(OfferListViewModel::class.java)
     }
+
 
     private var callbacks: CommonCallbacks? = null
 
@@ -57,7 +67,9 @@ class SellerProfilePage : Fragment(){
 
         btnLogout = view.findViewById(R.id.btnLogout)
         btnBack = view.findViewById(R.id.btnBack)
+        btnUseSwipe = view.findViewById(R.id.btnUseSwipe)
         txtSellerName = view.findViewById(R.id.txtSellerName)
+        txtNumSwipes = view.findViewById(R.id.txtNumSwipes)
 
 
         offersRecyclerView = view.findViewById(R.id.offeringsRecyclerView) as RecyclerView
@@ -71,8 +83,22 @@ class SellerProfilePage : Fragment(){
             callbacks?.onBack()
         }
 
-        //Populate name fields
-        txtSellerName.setText("${user.firstName} ${user.lastName}")
+        btnUseSwipe.setOnClickListener {
+            //update UI
+            if (user.meals != 0) {
+                //update database
+                val updateMealsLiveData: LiveData<ResponseObject<MealsUpdateReponse>> =
+                    BackendFetcher.get().updateMealsBySessionID(user.session, false, 1)
+                updateMealsLiveData.observe(viewLifecycleOwner, Observer {
+                    user.meals = it.data.meals
+                    updateUI()
+                })
+            } else {
+                Toast.makeText(context, "You're out of swipes", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
 
         updateUI()
 
@@ -82,6 +108,9 @@ class SellerProfilePage : Fragment(){
     private fun updateUI(){
         adapter = OfferAdapter(offerListViewModel.offers)
         offersRecyclerView.adapter = adapter
+
+        txtSellerName.setText("${user.firstName} ${user.lastName}")
+        txtNumSwipes.setText("${user.meals} swipes left")
     }
 
     private inner class OfferHolder(view: View): RecyclerView.ViewHolder(view){

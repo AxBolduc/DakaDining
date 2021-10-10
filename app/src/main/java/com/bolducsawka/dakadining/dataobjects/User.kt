@@ -9,12 +9,7 @@ import org.bson.types.ObjectId
 import java.io.Serializable
 import java.lang.IllegalArgumentException
 
-enum class MealPlan(val numMeals: Int){
-    Nineteen(19),
-    Fourteen(14),
-    TwoHundred(200),
-    None(0)
-}
+
 
 /*
 {
@@ -35,7 +30,8 @@ data class User(
     val lastName: String,
     val email: String,
     val password: String,
-    val meals: Int,
+    var meals: Int,
     val plan: Int,
     val role: String,
+    val session: String,
     val message: String?):Serializable, ResponseData
