@@ -1,7 +1,13 @@
 package com.bolducsawka.dakadining.fragments
 
+import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +22,7 @@ import com.bolducsawka.dakadining.dataobjects.Request
 import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
 import com.bolducsawka.dakadining.viewmodels.RequestListViewModel
+import java.io.ByteArrayOutputStream
 
 private const val ARG_USER = "user"
 
@@ -27,6 +34,8 @@ class BuyerProfilePage : Fragment(){
     private lateinit var btnBack: ImageView
 
     private lateinit var txtBuyerName: TextView
+
+    private lateinit var imgProfilePic: ImageView
 
     private lateinit var requestsRecyclerView: RecyclerView
     private var adapter: RequestAdapter? = null;
@@ -59,6 +68,7 @@ class BuyerProfilePage : Fragment(){
         btnLogout = view.findViewById(R.id.btnLogout)
         btnBack = view.findViewById(R.id.btnBack)
         txtBuyerName = view.findViewById(R.id.txtBuyerName)
+        imgProfilePic = view.findViewById(R.id.imgProfilePic)
 
         requestsRecyclerView = view.findViewById(R.id.requestRecyclerView) as RecyclerView
         requestsRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -72,6 +82,11 @@ class BuyerProfilePage : Fragment(){
 
         //Populate Name fields
         txtBuyerName.setText("${user.firstName} ${user.lastName}")
+
+
+        imgProfilePic.setOnClickListener {
+            dispatchTakePictureIntent()
+        }
 
 
         updateUI()
@@ -121,6 +136,33 @@ class BuyerProfilePage : Fragment(){
                     putSerializable(ARG_USER, user)
                 }
             }
+    }
+
+
+    val REQUEST_IMAGE_CAPTURE = 1
+
+    private fun dispatchTakePictureIntent() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+        } catch(e: ActivityNotFoundException) {
+            // display error
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            imgProfilePic.setImageBitmap(imageBitmap)
+
+            // convert bitmap to base 64
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+            val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
+
+            val encoded: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
+
+        }
     }
 
 }
