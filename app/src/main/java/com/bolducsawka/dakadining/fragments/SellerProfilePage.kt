@@ -35,6 +35,7 @@ class SellerProfilePage : Fragment(){
     private lateinit var btnLogout: ImageView
     private lateinit var btnBack: ImageView
     private lateinit var btnUseSwipe: Button
+    private lateinit var imgProfilePic: ImageView
 
     private lateinit var offersRecyclerView: RecyclerView
     private var adapter: OfferAdapter? = null;
@@ -42,7 +43,6 @@ class SellerProfilePage : Fragment(){
     private val offerListViewModel: OfferListViewModel by lazy {
         ViewModelProvider(this).get(OfferListViewModel::class.java)
     }
-
 
     private var callbacks: CommonCallbacks? = null
 
@@ -70,6 +70,7 @@ class SellerProfilePage : Fragment(){
         btnUseSwipe = view.findViewById(R.id.btnUseSwipe)
         txtSellerName = view.findViewById(R.id.txtSellerName)
         txtNumSwipes = view.findViewById(R.id.txtNumSwipes)
+        imgProfilePic = view.findViewById(R.id.imgProfilePic)
 
 
         offersRecyclerView = view.findViewById(R.id.offeringsRecyclerView) as RecyclerView

@@ -40,9 +40,9 @@
         android:layout_marginHorizontal="30dp">
 
         <ImageView
-            android:id="@+id/profileSellerImage"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:id="@+id/imgProfilePic"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_marginTop="30dp"
             android:cropToPadding="true"
             android:scaleType="centerInside"
@@ -51,20 +51,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/profiledefault" />
 
-        <ImageButton
-            android:id="@+id/profileSellerCam"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_camera"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileSellerImage" />
-
         <TextView
             android:id="@+id/txtSellerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat"
             android:text="Name"
             android:textColor="@color/black"
@@ -72,7 +62,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileSellerCam" />
+            tools:layout_editor_absoluteY="169dp" />
 
         <TextView
             android:id="@+id/txtNumSwipes"
