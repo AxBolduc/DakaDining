@@ -10,7 +10,13 @@ class OfferListViewModel: ViewModel(){
 
     init{
         for(i in 0 until 20){
-            val offer = Offer("Bob Ross", i, i*10F)
+            val offer = Offer(
+                "offerID",
+                i,
+                i,
+                false,
+                null
+            )
             offers += offer
         }
     }

@@ -11,6 +11,7 @@ import com.bolducsawka.dakadining.api.responseobjects.LoginResponse
 import com.bolducsawka.dakadining.api.responseobjects.MealsUpdateReponse
 import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
 import com.bolducsawka.dakadining.api.responseobjects.UpdatePictureResponse
+import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.dataobjects.Request
 import com.bolducsawka.dakadining.dataobjects.User
 import retrofit2.Call
@@ -157,6 +158,27 @@ class BackendFetcher private constructor(context: Context){
             override fun onFailure(call: Call<ResponseObject<Request>>, t: Throwable) {
                 t.printStackTrace()
             }
+        })
+
+        return responseLiveData
+    }
+
+    fun newOffer(newOffer: Offer): LiveData<ResponseObject<Offer>>{
+        val responseLiveData: MutableLiveData<ResponseObject<Offer>> = MutableLiveData()
+        val backendRequest: Call<ResponseObject<Offer>> = dakaBackend.newOffer(newOffer)
+
+        backendRequest.enqueue(object : Callback<ResponseObject<Offer>> {
+            override fun onResponse(
+                call: Call<ResponseObject<Offer>>,
+                response: Response<ResponseObject<Offer>>
+            ) {
+                responseLiveData.value = response.body()
+            }
+
+            override fun onFailure(call: Call<ResponseObject<Offer>>, t: Throwable) {
+                t.printStackTrace()
+            }
+
         })
 
         return responseLiveData

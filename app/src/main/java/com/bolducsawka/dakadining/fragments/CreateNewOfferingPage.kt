@@ -8,9 +8,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.bolducsawka.dakadining.R
+import com.bolducsawka.dakadining.api.BackendFetcher
+import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
+import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
+import kotlinx.android.synthetic.main.fragment_new_request_page.*
 
 private const val ARG_USERID = "userid"
 private const val TAG = "CreateNewOfferingPage"
@@ -64,8 +71,24 @@ class CreateNewOfferingPage : Fragment() {
 
         btnSubmitOffering.setOnClickListener {
 
+            val newOfferLiveData: LiveData<ResponseObject<Offer>> = BackendFetcher.get().newOffer(
+                Offer(
+                    userID,
+                    Integer.parseInt(txtInputNumSwipes.text.toString()),
+                    Integer.parseInt(txtInputOfferingPrice.text.toString()),
+                    false,
+                    null
+                )
+            )
+            newOfferLiveData.observe(viewLifecycleOwner, Observer {
+                if(it.status == 200){
+                    Toast.makeText(context, "Offer Created", Toast.LENGTH_SHORT).show()
+                    callbacks?.onNewSubmit(true)
+                }else{
+                    Toast.makeText(context, "Failed to create offer", Toast.LENGTH_SHORT).show()
+                }
+            })
 
-            callbacks?.onNewSubmit(true)
         }
 
 

@@ -168,7 +168,7 @@ class SellerProfilePage : Fragment(){
         override fun onBindViewHolder(holder: OfferHolder, position: Int) {
             val offer = offerListViewModel.offers[position]
             holder.apply{
-                txtNumOfSwipes.setText("${offer.swipes.toString()} swipes")
+                txtNumOfSwipes.setText("${offer.meals.toString()} swipes")
                 txtRequestPrice.setText(offer.price.toString())
                 txtRequestDateTime.visibility = View.INVISIBLE
             }

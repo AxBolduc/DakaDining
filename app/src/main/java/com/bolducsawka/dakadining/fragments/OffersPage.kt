@@ -117,7 +117,7 @@ class OffersPage : Fragment() {
         override fun onBindViewHolder(holder: OfferHolder, position: Int) {
             val request = offerListViewModel.offers[position]
             holder.apply{
-                txtNumOfSwipes.setText("${request.swipes.toString()} swipes")
+                txtNumOfSwipes.setText("${request.meals.toString()} swipes")
                 txtRequestPrice.setText(request.price.toString())
                 txtRequestDateTime.setText("")
 

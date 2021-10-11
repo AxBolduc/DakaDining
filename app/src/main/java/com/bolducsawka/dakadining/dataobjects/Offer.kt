@@ -1,3 +1,10 @@
 package com.bolducsawka.dakadining.dataobjects
 
-data class Offer(var offererName: String, var swipes: Int, var price: Float)
+import com.bolducsawka.dakadining.api.responseobjects.ResponseData
+
+data class Offer(
+    var offerer: String,
+    var meals: Int,
+    var price: Int,
+    var status: Boolean,
+    var takenBy: String?): ResponseData

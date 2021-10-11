@@ -7,6 +7,7 @@ import com.bolducsawka.dakadining.api.responseobjects.LoginResponse
 import com.bolducsawka.dakadining.api.responseobjects.MealsUpdateReponse
 import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
 import com.bolducsawka.dakadining.api.responseobjects.UpdatePictureResponse
+import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.dataobjects.Request
 import com.bolducsawka.dakadining.dataobjects.User
 import retrofit2.Call
@@ -31,5 +32,8 @@ interface DakaBackend {
 
     @POST("/api/requests/newRequest")
     fun newRequest(@Body newRequest: Request): Call<ResponseObject<Request>>
+
+    @POST("/api/offers/newOffer")
+    fun newOffer(@Body newOffer: Offer): Call<ResponseObject<Offer>>
 
 }
