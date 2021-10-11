@@ -9,10 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bolducsawka.dakadining.R
+import com.bolducsawka.dakadining.api.BackendFetcher
+import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
 import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.dataobjects.Request
 import com.bolducsawka.dakadining.dataobjects.User
@@ -80,7 +84,12 @@ class OffersPage : Fragment() {
         }
         imgProfile.setOnClickListener {
             //Determine if user is a seller or not
-            callbacks?.onProfile(user)
+            val userLiveData: LiveData<ResponseObject<User>> = BackendFetcher.get().getUserBySessionID(user.session)
+            userLiveData.observe(viewLifecycleOwner, Observer {
+                if(it.status == 200) {
+                    callbacks?.onProfile(it.data)
+                }
+            })
         }
 
         updateUI()

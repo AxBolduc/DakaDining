@@ -36,10 +36,9 @@ import com.bolducsawka.dakadining.api.requestobjects.UpdatePictureRequest
 import com.bolducsawka.dakadining.api.responseobjects.UpdatePictureResponse
 import java.io.ByteArrayOutputStream
 import android.graphics.BitmapFactory
-
-
-
-
+import androidx.activity.OnBackPressedCallback
+import androidx.lifecycle.MutableLiveData
+import java.util.*
 
 private const val ARG_USER = "user"
 private const val TAG = "SellerProfilePage"
@@ -47,6 +46,8 @@ private const val TAG = "SellerProfilePage"
 class SellerProfilePage : Fragment(){
 
     private lateinit var user: User
+
+    private var profilePic: MutableLiveData<String> = MutableLiveData()
 
     private lateinit var txtSellerName: TextView
     private lateinit var txtNumSwipes: TextView
@@ -66,6 +67,7 @@ class SellerProfilePage : Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             user = it.getSerializable(ARG_USER) as User
         }
@@ -81,6 +83,12 @@ class SellerProfilePage : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        //Refresh instance of user
+
+
+
+
         val view = inflater.inflate(R.layout.fragment_profile_seller_page, container, false)
 
         btnLogout = view.findViewById(R.id.btnLogout)
@@ -89,12 +97,6 @@ class SellerProfilePage : Fragment(){
         txtSellerName = view.findViewById(R.id.txtSellerName)
         txtNumSwipes = view.findViewById(R.id.txtNumSwipes)
         imgProfilePic = view.findViewById(R.id.imgProfilePic)
-
-        user.profilePic?.let {
-            val decodedString: ByteArray = Base64.decode(it, Base64.DEFAULT)
-            val decodedByte: Bitmap= BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-            imgProfilePic.setImageBitmap(decodedByte)
-        }
 
         offersRecyclerView = view.findViewById(R.id.offeringsRecyclerView) as RecyclerView
         offersRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -124,8 +126,12 @@ class SellerProfilePage : Fragment(){
 
         imgProfilePic.setOnClickListener {
             dispatchTakePictureIntent()
+
         }
 
+        profilePic.observe(viewLifecycleOwner, Observer {
+            user.profilePic = it
+        })
 
 
         updateUI()
@@ -139,6 +145,12 @@ class SellerProfilePage : Fragment(){
 
         txtSellerName.setText("${user.firstName} ${user.lastName}")
         txtNumSwipes.setText("${user.meals} swipes left")
+
+        user.profilePic.let {
+            val decodedString: ByteArray = Base64.decode(it, Base64.DEFAULT)
+            val decodedByte: Bitmap= BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            imgProfilePic.setImageBitmap(decodedByte)
+        }
     }
 
     private inner class OfferHolder(view: View): RecyclerView.ViewHolder(view){
@@ -190,6 +202,8 @@ class SellerProfilePage : Fragment(){
         }
     }
 
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
@@ -197,10 +211,11 @@ class SellerProfilePage : Fragment(){
 
         // convert bitmap to base 64
             val byteArrayOutputStream = ByteArrayOutputStream()
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
             val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
 
             val encoded: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
+            profilePic.value = encoded
 
             val profilePicLiveData: LiveData<ResponseObject<UpdatePictureResponse>> = BackendFetcher.get().updateProfilePicture(
                 UpdatePictureRequest(user.session, encoded)
@@ -216,6 +231,4 @@ class SellerProfilePage : Fragment(){
 
         }
     }
-
-
 }

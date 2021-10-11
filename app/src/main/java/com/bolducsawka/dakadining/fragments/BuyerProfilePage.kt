@@ -5,19 +5,28 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bolducsawka.dakadining.R
+import com.bolducsawka.dakadining.api.BackendFetcher
+import com.bolducsawka.dakadining.api.requestobjects.UpdatePictureRequest
+import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
+import com.bolducsawka.dakadining.api.responseobjects.UpdatePictureResponse
 import com.bolducsawka.dakadining.dataobjects.Request
 import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
@@ -69,6 +78,12 @@ class BuyerProfilePage : Fragment(){
         btnBack = view.findViewById(R.id.btnBack)
         txtBuyerName = view.findViewById(R.id.txtBuyerName)
         imgProfilePic = view.findViewById(R.id.imgProfilePic)
+
+        user.profilePic?.let {
+            val decodedString: ByteArray = Base64.decode(it, Base64.DEFAULT)
+            val decodedByte: Bitmap= BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            imgProfilePic.setImageBitmap(decodedByte)
+        }
 
         requestsRecyclerView = view.findViewById(R.id.requestRecyclerView) as RecyclerView
         requestsRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -157,11 +172,23 @@ class BuyerProfilePage : Fragment(){
 
             // convert bitmap to base 64
             val byteArrayOutputStream = ByteArrayOutputStream()
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG,100, byteArrayOutputStream)
             val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
 
             val encoded: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
+            user.profilePic = encoded
 
+            val profilePicLiveData: LiveData<ResponseObject<UpdatePictureResponse>> = BackendFetcher.get().updateProfilePicture(
+                UpdatePictureRequest(user.session, encoded)
+            )
+
+            profilePicLiveData.observe(viewLifecycleOwner, Observer {
+                if(it.status == 200){
+                    Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
+                }
+            })
         }
     }
 

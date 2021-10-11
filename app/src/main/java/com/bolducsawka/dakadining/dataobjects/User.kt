@@ -35,4 +35,4 @@ data class User(
     val role: String,
     val session: String,
     val message: String?,
-    val profilePic: String?):Serializable, ResponseData
+    var profilePic: String):Serializable, ResponseData
