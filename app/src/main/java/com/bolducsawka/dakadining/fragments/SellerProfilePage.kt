@@ -143,7 +143,9 @@ class SellerProfilePage : Fragment(){
         offerListViewModel.getOffers()
         offerListViewModel.offers?.observe(viewLifecycleOwner, Observer {
             if(it.status == 200){
-                offers = it.data.offers
+                offers = it.data.offers.filter {
+                    it.offerer == user.userID
+                }
             }
 
             updateUI()

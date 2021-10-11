@@ -38,6 +38,7 @@ private const val ARG_USER = "user"
 class BuyerProfilePage : Fragment(){
 
     private lateinit var user: User
+    private var requests: List<Request> = mutableListOf()
 
     private lateinit var btnLogout: ImageView
     private lateinit var btnBack: ImageView
@@ -109,8 +110,21 @@ class BuyerProfilePage : Fragment(){
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requestListViewModel.getRequests()
+        requestListViewModel.requests?.observe(viewLifecycleOwner, Observer {
+            if(it.status == 200){
+                requests = it.data.requests.filter {
+                    it.requester == user.userID
+                }
+            }
+            updateUI()
+        })
+    }
+
     private fun updateUI(){
-        adapter = RequestAdapter(requestListViewModel.requests)
+        adapter = RequestAdapter(requests)
         requestsRecyclerView.adapter = adapter
     }
 
@@ -127,7 +141,7 @@ class BuyerProfilePage : Fragment(){
         }
 
         override fun onBindViewHolder(holder: RequestHolder, position: Int) {
-            val request = requestListViewModel.requests[position]
+            val request = requests[position]
             holder.apply{
                 txtNumOfSwipes.setText("${request.meals.toString()} swipes")
                 txtRequestPrice.setText(request.price.toString())
@@ -136,7 +150,7 @@ class BuyerProfilePage : Fragment(){
             }
         }
 
-        override fun getItemCount(): Int = requestListViewModel.requests.size
+        override fun getItemCount(): Int = requests.size
     }
 
     override fun onDetach() {
