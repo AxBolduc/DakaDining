@@ -75,12 +75,12 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
             .commit()
     }
 
-    override fun onAdd(fromOffers: Boolean) {
+    override fun onAdd(fromOffers: Boolean, userID: String) {
         var fragment: Fragment? = null;
         if(fromOffers){
-            fragment = CreateNewOfferingPage.newInstance()
+            fragment = CreateNewOfferingPage.newInstance(userID)
         }else{
-            fragment = CreateNewRequestPage.newInstance()
+            fragment = CreateNewRequestPage.newInstance(userID)
         }
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)

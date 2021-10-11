@@ -129,9 +129,9 @@ class BuyerProfilePage : Fragment(){
         override fun onBindViewHolder(holder: RequestHolder, position: Int) {
             val request = requestListViewModel.requests[position]
             holder.apply{
-                txtNumOfSwipes.setText("${request.swipes.toString()} swipes")
+                txtNumOfSwipes.setText("${request.meals.toString()} swipes")
                 txtRequestPrice.setText(request.price.toString())
-                txtRequestDateTime.setText(request.date.time.toString())
+                txtRequestDateTime.setText(request.time.time.toString())
 
             }
         }

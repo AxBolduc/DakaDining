@@ -12,11 +12,16 @@ import androidx.fragment.app.Fragment
 import com.bolducsawka.dakadining.R
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
 
+private const val ARG_USERID = "userid"
+private const val TAG = "CreateNewOfferingPage"
+
 class CreateNewOfferingPage : Fragment() {
 
     interface Callbacks{
         fun onNewSubmit(fromOffering:Boolean)
     }
+
+    private lateinit var userID: String
 
     private lateinit var btnBack: ImageView
     private lateinit var btnSubmitOffering: Button
@@ -29,6 +34,9 @@ class CreateNewOfferingPage : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let {
+            userID = it.getSerializable(ARG_USERID) as String
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -55,6 +63,8 @@ class CreateNewOfferingPage : Fragment() {
         }
 
         btnSubmitOffering.setOnClickListener {
+
+
             callbacks?.onNewSubmit(true)
         }
 
@@ -69,8 +79,11 @@ class CreateNewOfferingPage : Fragment() {
     }
 
     companion object{
-        fun newInstance() =
+        fun newInstance(userID: String) =
             CreateNewOfferingPage().apply {
+                arguments = Bundle().apply {
+                    putSerializable(ARG_USERID, userID)
+                }
 
             }
     }

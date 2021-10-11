@@ -12,13 +12,25 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.bolducsawka.dakadining.R
+import com.bolducsawka.dakadining.api.BackendFetcher
+import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
+import com.bolducsawka.dakadining.dataobjects.Request
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
 import java.util.*
 
+private const val ARG_USERID = "userid"
+private const val TAG = "CreateNewRequestPage"
+
 class CreateNewRequestPage: Fragment() {
 
+
+    private lateinit var userID: String
+    private var date: Date = Date()
 
     private lateinit var btnBack: ImageView
     private lateinit var btnSubmitRequest: Button
@@ -36,7 +48,9 @@ class CreateNewRequestPage: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        arguments?.let {
+            userID = it.getSerializable(ARG_USERID) as String
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -72,6 +86,11 @@ class CreateNewRequestPage: Fragment() {
 
 
             datePicker = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
+                date.let {
+                    it.year = year;
+                    it.month = month;
+                    it.date = day
+                }
                 txtInputDate.setText("${month}/${day}/${year}")
             }, year, month, day)
 
@@ -84,6 +103,10 @@ class CreateNewRequestPage: Fragment() {
             val min = calendar.get(Calendar.MINUTE)
 
             timePicker = TimePickerDialog(requireContext(), TimePickerDialog.OnTimeSetListener { timePicker, hour, min ->
+                date.let {
+                    it.hours = hour
+                    it.minutes = min
+                }
                 txtInputTime.setText("${hour}:${min}")
             }, hour, min, false)
 
@@ -95,7 +118,26 @@ class CreateNewRequestPage: Fragment() {
         }
 
         btnSubmitRequest.setOnClickListener {
-            callbacks?.onNewSubmit(false)
+            val newRequestResponse: LiveData<ResponseObject<Request>> = BackendFetcher.get().newRequest(
+                Request(
+                    userID,
+                    Integer.parseInt(txtInputNumSwipes.text.toString()),
+                    Integer.parseInt(txtInputPrice.text.toString()),
+                    date,
+                    false,
+                    null,
+                    null
+                )
+            )
+
+            newRequestResponse.observe(viewLifecycleOwner, Observer {
+                if(it.status == 200) {
+                    Toast.makeText(context, "Request Created", Toast.LENGTH_SHORT).show()
+                    callbacks?.onNewSubmit(false)
+                }else{
+                    Toast.makeText(context, "Failed to create request", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
         return view
     }
@@ -108,9 +150,11 @@ class CreateNewRequestPage: Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(userID: String) =
             CreateNewRequestPage().apply {
-
+                arguments = Bundle().apply {
+                    putSerializable(ARG_USERID, userID)
+                }
             }
     }
 

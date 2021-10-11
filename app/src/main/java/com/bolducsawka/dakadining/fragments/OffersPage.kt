@@ -28,7 +28,7 @@ class OffersPage : Fragment() {
 
     interface Callbacks{
         fun swapPages(user: User, fromOffers: Boolean)
-        fun onAdd(fromOffers:Boolean)
+        fun onAdd(fromOffers:Boolean, userID: String)
         fun onProfile(user: User)
     }
 
@@ -80,7 +80,7 @@ class OffersPage : Fragment() {
             callbacks?.swapPages(user, true)
         }
         imgAdd.setOnClickListener {
-            callbacks?.onAdd(true)
+            callbacks?.onAdd(true, user.userID)
         }
         imgProfile.setOnClickListener {
             //Determine if user is a seller or not

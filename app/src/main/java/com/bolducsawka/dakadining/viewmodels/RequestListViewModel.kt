@@ -9,7 +9,15 @@ class RequestListViewModel: ViewModel(){
 
     init{
         for(i in 0 until 20){
-            val request = Request("Bob Ross", i, i*10F, Date())
+            val request = Request(
+                "requesterID",
+                1,
+                i,
+                Date(),
+                false,
+                null,
+                null
+            )
             requests += request
         }
     }
