@@ -1,23 +1,18 @@
 package com.bolducsawka.dakadining.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.bolducsawka.dakadining.dataobjects.Offer
-import com.bolducsawka.dakadining.dataobjects.Request
-import java.util.*
+import com.bolducsawka.dakadining.api.BackendFetcher
+import com.bolducsawka.dakadining.api.responseobjects.GetOffersResponse
+import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
+
+private const val TAG = "OfferListViewModel"
 
 class OfferListViewModel: ViewModel(){
-    val offers = mutableListOf<Offer>()
+    var offers: LiveData<ResponseObject<GetOffersResponse>>? =  null;
 
-    init{
-        for(i in 0 until 20){
-            val offer = Offer(
-                "offerID",
-                i,
-                i,
-                false,
-                null
-            )
-            offers += offer
-        }
+    fun getOffers(){
+        offers = BackendFetcher.get().getOffers()
     }
+
 }

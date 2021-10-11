@@ -3,10 +3,7 @@ package com.bolducsawka.dakadining.api
 import com.bolducsawka.dakadining.api.requestobjects.CreateUserRequest
 import com.bolducsawka.dakadining.api.requestobjects.LoginCredentials
 import com.bolducsawka.dakadining.api.requestobjects.UpdatePictureRequest
-import com.bolducsawka.dakadining.api.responseobjects.LoginResponse
-import com.bolducsawka.dakadining.api.responseobjects.MealsUpdateReponse
-import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
-import com.bolducsawka.dakadining.api.responseobjects.UpdatePictureResponse
+import com.bolducsawka.dakadining.api.responseobjects.*
 import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.dataobjects.Request
 import com.bolducsawka.dakadining.dataobjects.User
@@ -35,5 +32,11 @@ interface DakaBackend {
 
     @POST("/api/offers/newOffer")
     fun newOffer(@Body newOffer: Offer): Call<ResponseObject<Offer>>
+
+    @GET("/api/requests/getRequests")
+    fun getRequests(): Call<ResponseObject<GetRequestsResponse>>
+
+    @GET("/api/offers/getOffers")
+    fun getOffers(): Call<ResponseObject<GetOffersResponse>>
 
 }

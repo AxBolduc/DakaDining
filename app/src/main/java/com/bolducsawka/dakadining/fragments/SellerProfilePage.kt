@@ -46,6 +46,7 @@ private const val TAG = "SellerProfilePage"
 class SellerProfilePage : Fragment(){
 
     private lateinit var user: User
+    private var offers: List<Offer> = mutableListOf()
 
     private var profilePic: MutableLiveData<String> = MutableLiveData()
 
@@ -85,9 +86,6 @@ class SellerProfilePage : Fragment(){
     ): View? {
 
         //Refresh instance of user
-
-
-
 
         val view = inflater.inflate(R.layout.fragment_profile_seller_page, container, false)
 
@@ -139,8 +137,21 @@ class SellerProfilePage : Fragment(){
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        offerListViewModel.getOffers()
+        offerListViewModel.offers?.observe(viewLifecycleOwner, Observer {
+            if(it.status == 200){
+                offers = it.data.offers
+            }
+
+            updateUI()
+        })
+    }
+
     private fun updateUI(){
-        adapter = OfferAdapter(offerListViewModel.offers)
+        adapter = OfferAdapter(offers)
         offersRecyclerView.adapter = adapter
 
         txtSellerName.setText("${user.firstName} ${user.lastName}")
@@ -166,7 +177,7 @@ class SellerProfilePage : Fragment(){
         }
 
         override fun onBindViewHolder(holder: OfferHolder, position: Int) {
-            val offer = offerListViewModel.offers[position]
+            val offer = offers[position]
             holder.apply{
                 txtNumOfSwipes.setText("${offer.meals.toString()} swipes")
                 txtRequestPrice.setText(offer.price.toString())
@@ -174,7 +185,7 @@ class SellerProfilePage : Fragment(){
             }
         }
 
-        override fun getItemCount(): Int = offerListViewModel.offers.size
+        override fun getItemCount(): Int = offers.size
     }
 
     override fun onDetach() {

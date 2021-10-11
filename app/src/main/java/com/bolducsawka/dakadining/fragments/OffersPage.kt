@@ -32,6 +32,9 @@ class OffersPage : Fragment() {
         fun onProfile(user: User)
     }
 
+
+    private var offers: List<Offer> = mutableListOf()
+
     private lateinit var user: User
 
     private lateinit var imgSwapPage: ImageView
@@ -97,8 +100,21 @@ class OffersPage : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        offerListViewModel.getOffers()
+        offerListViewModel.offers?.observe(viewLifecycleOwner, Observer {
+            if(it.status == 200){
+                offers = it.data.offers
+            }
+
+            updateUI()
+        })
+    }
+
     private fun updateUI(){
-        adapter = OfferAdapter(offerListViewModel.offers)
+        adapter = OfferAdapter(offers)
         offersRecyclerView.adapter = adapter
     }
 
@@ -115,16 +131,16 @@ class OffersPage : Fragment() {
         }
 
         override fun onBindViewHolder(holder: OfferHolder, position: Int) {
-            val request = offerListViewModel.offers[position]
+            val offer = offers[position]
             holder.apply{
-                txtNumOfSwipes.setText("${request.meals.toString()} swipes")
-                txtRequestPrice.setText(request.price.toString())
+                txtNumOfSwipes.setText("${offer.meals.toString()} swipes")
+                txtRequestPrice.setText(offer.price.toString())
                 txtRequestDateTime.setText("")
 
             }
         }
 
-        override fun getItemCount(): Int = offerListViewModel.offers.size
+        override fun getItemCount(): Int = offers.size
     }
 
     override fun onDetach() {
