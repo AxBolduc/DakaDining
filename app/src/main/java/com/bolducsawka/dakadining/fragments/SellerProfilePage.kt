@@ -157,7 +157,7 @@ class SellerProfilePage : Fragment(){
         txtSellerName.setText("${user.firstName} ${user.lastName}")
         txtNumSwipes.setText("${user.meals} swipes left")
 
-        user.profilePic.let {
+        user.profilePic?.let {
             val decodedString: ByteArray = Base64.decode(it, Base64.DEFAULT)
             val decodedByte: Bitmap= BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
             imgProfilePic.setImageBitmap(decodedByte)
