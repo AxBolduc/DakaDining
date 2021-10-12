@@ -4,8 +4,8 @@ A native Android app written in Kotlin to help facilitate students at WPI to tra
 ## Task ID | Demonstration of Completion
 (1) See Canvas submission for Checkpoint PDF
 
-(2) Find video attached to Canvas submission, link is also included here:
-		Https Drive.google etc etc etc
+(2) For video see comment attached to Canvas submission, link is also included here: https://drive.google.com/file/d/1HjkZ1gyIbq-e6umscSQBBWHNf8M6ZcR3/view?usp=sharing
+
 More information about the correctness and evaluation of our application is detailed below
 
 (4) Find source code enclosed in Canvas zip submission
