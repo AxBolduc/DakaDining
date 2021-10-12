@@ -2,7 +2,7 @@
 A native Android app written in Kotlin to help facilitate students at WPI to trade meal swipes
 
 ## Task ID | Demonstration of Completion
-(1) See Canvas submission
+(1) See Canvas submission for Checkpoint PDF
 
 (2) Find video attached to Canvas submission, link is also included here:
 		Https Drive.google etc etc etc
