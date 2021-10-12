@@ -30,6 +30,16 @@
     <string name="txtUseSwipe">इस्तेमाल किया स्वाइप करें</string>
     <string name="txtDate">दिनांक</string>
     <string name="txtPrice">कीमत</string>
+     <string name="edit_offer">ऑफ़र संपादित करें</string>
+    <string name="delete_offer">ऑफ़र हटाएं</string>
+    <string name="edit_request">अनुरोध संपादित करें</string>
+    <string name="delete_request">अनुरोध हटा दें</string>
+    <string name="fulfill_request">अनुरोध पूरा करेंt</string>
+    <string name="name">नाम</string>
+    <string name="swipes_left"># स्वाइप लेफ्ट</string>
+    <string name="purchase_offering">खरीदारी की पेशकश</string>
+    <string name="accept_offer">प्रस्ताव स्वीकार करें</string>
+    <string name="requests">अनुरोध</string>
 
     <string-array name="arrMealPlans">
         <item>19/सप्ताह</item>
