@@ -30,6 +30,17 @@
     <string name="txtUseSwipe">Deslizar usado</string>
     <string name="txtDate">Fecha</string>
     <string name="txtPrice">Precio</string>
+    <string name="edit_offer">Editar oferta</string>
+    <string name="delete_offer">Eliminar oferta</string>
+    <string name="edit_request">Editar solicitud</string>
+    <string name="delete_request">Borrar petición</string>
+    <string name="fulfill_request">Cumplir con la solicitud</string>
+    <string name="name">Nombre</string>
+    <string name="swipes_left"># Desliza hacia la izquierda</string>
+    <string name="purchase_offering">Oferta de compra</string>
+    <string name="accept_offer">Aceptar la oferta</string>
+    <string name="requests">Peticiones</string>
+
 
     <string-array name="arrMealPlans">
         <item>19/semana</item>
