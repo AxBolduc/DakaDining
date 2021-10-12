@@ -23,7 +23,7 @@ class BackendFetcher private constructor(context: Context){
 
     init{
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.1.221:4000")
+            .baseUrl("http://axbolduc.com:5000")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -53,6 +53,7 @@ class BackendFetcher private constructor(context: Context){
 
         backendRequest.enqueue(object: Callback<ResponseObject<LoginResponse>>{
             override fun onFailure(call: Call<ResponseObject<LoginResponse>>, t: Throwable) {
+                t.printStackTrace()
                 Log.d(TAG, "loginUser request failed")
             }
 
