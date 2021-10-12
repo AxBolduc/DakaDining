@@ -54,7 +54,7 @@ class SellerProfilePage : Fragment(){
     private lateinit var imgProfilePic: ImageView
 
     private lateinit var offersRecyclerView: RecyclerView
-    private var adapter: OfferAdapter? = null;
+    private var adapter: OfferAdapter? = null
 
     private val offerListViewModel: OfferListViewModel by lazy {
         ViewModelProvider(this).get(OfferListViewModel::class.java)
@@ -155,8 +155,8 @@ class SellerProfilePage : Fragment(){
         adapter = OfferAdapter(offers)
         offersRecyclerView.adapter = adapter
 
-        txtSellerName.setText("${user.firstName} ${user.lastName}")
-        txtNumSwipes.setText("${user.meals} swipes left")
+        txtSellerName.text = "${user.firstName} ${user.lastName}"
+        txtNumSwipes.text = "${user.meals} swipes left"
 
         user.profilePic?.let {
             val decodedString: ByteArray = Base64.decode(it, Base64.DEFAULT)
@@ -190,8 +190,8 @@ class SellerProfilePage : Fragment(){
         override fun onBindViewHolder(holder: OfferHolder, position: Int) {
             val offer = offers[position]
             holder.apply{
-                txtNumOfSwipes.setText("${offer.meals.toString()} swipes")
-                txtRequestPrice.setText("$${offer.price.toString()}")
+                txtNumOfSwipes.text = "${offer.meals} swipes"
+                txtRequestPrice.text = "$${offer.price}"
                 txtRequestDateTime.visibility = View.INVISIBLE
 
                 heldOffer = offer

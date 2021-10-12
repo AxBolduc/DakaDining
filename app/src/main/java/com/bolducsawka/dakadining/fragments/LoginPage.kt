@@ -41,10 +41,6 @@ class LoginPage : Fragment() {
     private lateinit var btnLogin: Button
     private lateinit var btnSignUp: Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as Callbacks?

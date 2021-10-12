@@ -27,52 +27,5 @@ import org.junit.Before
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
-    private lateinit var loginPage: LoginPage;
 
-    @Before
-    fun createLoginPage(){
-        Realm.init(InstrumentationRegistry.getInstrumentation().targetContext)
-        dakaApp = App(
-            AppConfiguration.Builder(BuildConfig.MONGODB_REALM_APP_ID)
-                .defaultSyncErrorHandler{ session, error ->
-                    Log.e("Tests", "Sync error: ${error.errorMessage}")
-                }.build())
-
-    }
-
-    @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.bolducsawka.dakadining", appContext.packageName)
-    }
-
-    @Test
-    fun createUser(){
-        dakaApp.emailPassword.registerUserAsync("User", "Password"){
-            if(it.isSuccess){
-                assertTrue(true)
-            }else{
-                assertTrue(false)
-            }
-        }
-    }
-
-    @After
-    fun after(){
-        if(dakaApp.currentUser() != null){
-            val config = SyncConfiguration.Builder(dakaApp.currentUser(), "user=${dakaApp.currentUser()!!.id}").build()
-
-            val realm: Realm = Realm.getInstance(config)
-
-            realm.executeTransactionAsync {
-                val item = it.where<User>().equalTo("email", "User").findFirst()
-
-                if (item != null) {
-                    item.deleteFromRealm()
-                }
-            }
-
-        }
-    }
 }

@@ -350,7 +350,7 @@ class BackendFetcher private constructor(context: Context){
 
 
     companion object{
-        private var INSTANCE: BackendFetcher? = null;
+        private var INSTANCE: BackendFetcher? = null
         fun initialize(context: Context){
             if(INSTANCE==null){
                 INSTANCE = BackendFetcher(context)

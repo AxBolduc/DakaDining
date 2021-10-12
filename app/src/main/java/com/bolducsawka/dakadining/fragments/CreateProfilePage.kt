@@ -34,19 +34,15 @@ class CreateProfilePage : Fragment() {
 
     private var meals: Int = 0
 
-    private lateinit var txtInputFirstName: EditText;
-    private lateinit var txtInputLastName: EditText;
-    private lateinit var txtInputEmail: EditText;
-    private lateinit var txtInputPassword: EditText;
+    private lateinit var txtInputFirstName: EditText
+    private lateinit var txtInputLastName: EditText
+    private lateinit var txtInputEmail: EditText
+    private lateinit var txtInputPassword: EditText
 
     private lateinit var btnCreateSignUp: Button
     private lateinit var btnCreateCancel: Button
 
     private lateinit var spinnerMealPlan: Spinner
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -137,8 +133,8 @@ class CreateProfilePage : Fragment() {
             }
             else{
                 Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
-                btnCreateSignUp.isEnabled = true;
-                btnCreateCancel.isEnabled = true;
+                btnCreateSignUp.isEnabled = true
+                btnCreateCancel.isEnabled = true
             }
         })
 

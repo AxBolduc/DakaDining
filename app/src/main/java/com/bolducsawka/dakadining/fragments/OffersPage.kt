@@ -45,7 +45,7 @@ class OffersPage : Fragment() {
     private lateinit var imgProfile: ImageView
 
     private lateinit var offersRecyclerView: RecyclerView
-    private var adapter: OffersPage.OfferAdapter? = null;
+    private var adapter: OffersPage.OfferAdapter? = null
 
     private val offerListViewModel: OfferListViewModel by lazy {
         ViewModelProvider(this).get(OfferListViewModel::class.java)
@@ -134,7 +134,7 @@ class OffersPage : Fragment() {
             itemView.setOnClickListener(this)
         }
 
-        var heldOffer: Offer? = null;
+        var heldOffer: Offer? = null
 
 
         override fun onClick(p0: View?) {
@@ -153,9 +153,9 @@ class OffersPage : Fragment() {
         override fun onBindViewHolder(holder: OfferHolder, position: Int) {
             val offer = offers[position]
             holder.apply{
-                txtNumOfSwipes.setText("${offer.meals.toString()} swipes")
-                txtRequestPrice.setText("$${offer.price.toString()}")
-                txtRequestDateTime.setText("")
+                txtNumOfSwipes.text = "${offer.meals} swipes"
+                txtRequestPrice.text = "$${offer.price}"
+                txtRequestDateTime.text = ""
                 heldOffer = offer
             }
         }

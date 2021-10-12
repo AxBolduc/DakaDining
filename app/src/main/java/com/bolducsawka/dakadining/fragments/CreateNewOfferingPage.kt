@@ -24,10 +24,6 @@ private const val TAG = "CreateNewOfferingPage"
 
 class CreateNewOfferingPage : Fragment() {
 
-    interface Callbacks{
-        fun onNewSubmit(fromOffering:Boolean)
-    }
-
     private lateinit var userID: String
 
     private lateinit var btnBack: ImageView
@@ -37,7 +33,6 @@ class CreateNewOfferingPage : Fragment() {
     private lateinit var txtInputOfferingPrice: EditText
 
     private var commonCallbacks: CommonCallbacks? = null
-    private var callbacks: Callbacks? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +44,6 @@ class CreateNewOfferingPage : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         commonCallbacks = context as CommonCallbacks
-        callbacks = context as Callbacks
     }
 
     override fun onCreateView(
@@ -85,7 +79,7 @@ class CreateNewOfferingPage : Fragment() {
             newOfferLiveData.observe(viewLifecycleOwner, Observer {
                 if(it.status == 200){
                     Toast.makeText(context, "Offer Created", Toast.LENGTH_SHORT).show()
-                    callbacks?.onNewSubmit(true)
+                    commonCallbacks?.onBack()
                 }else{
                     Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
                 }
@@ -100,7 +94,6 @@ class CreateNewOfferingPage : Fragment() {
     override fun onDetach() {
         super.onDetach()
         commonCallbacks = null
-        callbacks = null
     }
 
     companion object{

@@ -9,7 +9,7 @@ import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
 private const val TAG = "OfferListViewModel"
 
 class OfferListViewModel: ViewModel(){
-    var offers: LiveData<ResponseObject<GetOffersResponse>>? =  null;
+    var offers: LiveData<ResponseObject<GetOffersResponse>>? =  null
 
     fun getOffers(){
         offers = BackendFetcher.get().getOffers()

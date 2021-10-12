@@ -10,13 +10,17 @@ import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.fragments.*
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
 
-class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage.Callbacks, OffersPage.Callbacks, CreateNewOfferingPage.Callbacks,  CommonCallbacks{
+class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage.Callbacks, OffersPage.Callbacks,   CommonCallbacks{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //Initialize BackendFetcher singleton
         BackendFetcher.initialize(this)
 
+
+        //Initialize fragment navigation
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
         if(currentFragment == null){
@@ -24,6 +28,10 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
             supportFragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()
         }
     }
+
+    /**
+     * Fragment navigation callbacks
+     */
 
     override fun onCreateUser() {
         val fragment = CreateProfilePage.newInstance()
@@ -34,7 +42,9 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
     }
 
     override fun onUserLoggedIn(user: User) {
-        var fragment: Fragment? = null;
+        var fragment: Fragment? = null
+
+        //If the user is a seller send them to the requests page, or else to the offers page
         if(user.role.equals("Seller")){
              fragment = RequestsPage.newInstance(user)
         }else{
@@ -51,7 +61,9 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
     }
 
     override fun onProfileCreated(user: User) {
-        var fragment: Fragment? = null;
+        var fragment: Fragment? = null
+
+        //If the user is a seller send them to the requests page, or else to the offers page
         if(user.role.equals("Seller")){
             fragment = RequestsPage.newInstance(user)
         }else{
@@ -64,7 +76,9 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
     }
 
     override fun swapPages(user: User, fromOffers: Boolean) {
-        var fragment: Fragment? = null;
+        var fragment: Fragment? = null
+
+        //Send user to the page opposite they one they were on
         if(fromOffers){
             fragment = RequestsPage.newInstance(user)
         }else{
@@ -77,7 +91,9 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
     }
 
     override fun onAdd(fromOffers: Boolean, userID: String) {
-        var fragment: Fragment? = null;
+        var fragment: Fragment? = null
+
+        //send to add page based on the page they started
         if(fromOffers){
             fragment = CreateNewOfferingPage.newInstance(userID)
         }else{
@@ -90,7 +106,9 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
     }
 
     override fun onProfile(user: User) {
-        var fragment: Fragment? = null;
+        var fragment: Fragment? = null
+
+        //Send user to the correct profile fragment depending on the type of user they are
         if(user.role.equals("Seller")){
             fragment = SellerProfilePage.newInstance(user)
         }else{
@@ -103,10 +121,13 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
     }
 
     override fun onBack() {
+        //Go back a page in the backstack
         supportFragmentManager.popBackStack()
     }
 
     override fun onLogout() {
+
+        //Logout
         for (i in 0..supportFragmentManager.backStackEntryCount){
             supportFragmentManager.popBackStack()
         }
@@ -119,6 +140,9 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
 
     override fun onObjectClick(user: User, fromOffers: Boolean, swipeObject: SwipeObject, toEdit: Boolean) {
         var fragment: Fragment?= null
+
+        //Send user to the edit page based on type of object they are editing
+        //Or send them to the purchase object page based on the object they click on and their role
         if(!toEdit) {
             if (fromOffers) {
                 fragment = PurchaseOfferingPage.newInstance(user, swipeObject)
@@ -139,7 +163,4 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
             .commit()
     }
 
-    override fun onNewSubmit(fromOffering: Boolean) {
-        supportFragmentManager.popBackStack()
-    }
 }

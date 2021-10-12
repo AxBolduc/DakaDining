@@ -25,6 +25,7 @@ import com.bolducsawka.dakadining.dataobjects.Request
 import com.bolducsawka.dakadining.dataobjects.SwipeObject
 import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
+import java.text.SimpleDateFormat
 import java.util.*
 
 private const val ARG_USER = "user"
@@ -51,7 +52,6 @@ class EditRequestPage: Fragment() {
     private lateinit var timePicker: TimePickerDialog
 
     private var commonCallbacks: CommonCallbacks? = null
-    private var callbacks: CreateNewOfferingPage.Callbacks? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +64,6 @@ class EditRequestPage: Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         commonCallbacks = context as CommonCallbacks
-        callbacks = context as CreateNewOfferingPage.Callbacks
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -101,11 +100,11 @@ class EditRequestPage: Fragment() {
 
             datePicker = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
                 date.let {
-                    it.year = year;
-                    it.month = month+1;
+                    it.year = year
+                    it.month = month
                     it.date = day
                 }
-                txtInputDate.setText("${month+1}/${day}/${year}")
+                txtInputDate.setText(SimpleDateFormat("MM/dd/yy", Locale.getDefault()).format(date))
             }, year, month, day)
 
             datePicker.show()
@@ -121,7 +120,7 @@ class EditRequestPage: Fragment() {
                     it.hours = hour
                     it.minutes = min
                 }
-                txtInputTime.setText("${hour}:${min}")
+                txtInputTime.setText(SimpleDateFormat("hh:mm").format(date))
             }, hour, min, false)
 
             timePicker.show()
@@ -176,7 +175,6 @@ class EditRequestPage: Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        callbacks = null
         commonCallbacks = null
     }
 

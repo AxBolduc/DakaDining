@@ -38,7 +38,7 @@ class RequestsPage : Fragment() {
     private lateinit var imgProfile: ImageView
 
     private lateinit var requestsRecyclerView: RecyclerView
-    private var adapter: RequestsPage.RequestAdapter? = null;
+    private var adapter: RequestsPage.RequestAdapter? = null
 
     private val requestListViewModel: RequestListViewModel by lazy {
         ViewModelProvider(this).get(RequestListViewModel::class.java)
@@ -145,9 +145,9 @@ class RequestsPage : Fragment() {
             val request = requests[position]
             val sdf = SimpleDateFormat("MM/dd/yy hh:mm", Locale.getDefault())
             holder.apply{
-                txtNumOfSwipes.setText("${request.meals.toString()} swipes")
-                txtRequestPrice.setText("$${request.price.toString()}")
-                txtRequestDateTime.setText(sdf.format(request.time))
+                txtNumOfSwipes.text = "${request.meals} swipes"
+                txtRequestPrice.text = "$${request.price}"
+                txtRequestDateTime.text = sdf.format(request.time)
 
                 heldRequest = request
 

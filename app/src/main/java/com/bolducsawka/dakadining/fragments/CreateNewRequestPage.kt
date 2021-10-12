@@ -29,7 +29,6 @@ private const val TAG = "CreateNewRequestPage"
 
 class CreateNewRequestPage: Fragment() {
 
-
     private lateinit var userID: String
     private var date: Date = Date()
 
@@ -45,7 +44,6 @@ class CreateNewRequestPage: Fragment() {
     private lateinit var timePicker: TimePickerDialog
 
     private var commonCallbacks: CommonCallbacks? = null
-    private var callbacks: CreateNewOfferingPage.Callbacks? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +55,6 @@ class CreateNewRequestPage: Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         commonCallbacks = context as CommonCallbacks
-        callbacks = context as CreateNewOfferingPage.Callbacks
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -88,8 +85,8 @@ class CreateNewRequestPage: Fragment() {
 
             datePicker = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
                 date.let {
-                    it.year = year;
-                    it.month = month;
+                    it.year = year
+                    it.month = month
                     it.date = day
                 }
                 txtInputDate.setText(SimpleDateFormat("MM/dd/yy", Locale.getDefault()).format(date))
@@ -135,7 +132,7 @@ class CreateNewRequestPage: Fragment() {
             newRequestResponse.observe(viewLifecycleOwner, Observer {
                 if(it.status == 200) {
                     Toast.makeText(context, "Request Created", Toast.LENGTH_SHORT).show()
-                    callbacks?.onNewSubmit(false)
+                    commonCallbacks?.onBack()
                 }else{
                     Toast.makeText(context, "Failed to create request", Toast.LENGTH_SHORT).show()
                 }
@@ -146,7 +143,6 @@ class CreateNewRequestPage: Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        callbacks = null
         commonCallbacks = null
     }
 
