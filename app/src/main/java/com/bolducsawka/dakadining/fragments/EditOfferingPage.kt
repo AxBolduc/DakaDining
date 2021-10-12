@@ -75,6 +75,8 @@ class EditOfferingPage : Fragment() {
         }
 
         btnSubmitOffering.setOnClickListener {
+
+            //update offer request
             val updateOfferLiveData: LiveData<ResponseObject<Offer>> = BackendFetcher.get().updateOffer(
                 Offer(
                     offer.offerID,
@@ -89,9 +91,11 @@ class EditOfferingPage : Fragment() {
             
             updateOfferLiveData.observe(viewLifecycleOwner, Observer {
                 if(it.status == 200){
+                    //success
                     Toast.makeText(context, "Offering Updated", Toast.LENGTH_SHORT).show()
                     commonCallbacks?.onBack()
                 }else{
+                    //fail
                     Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
                 }
             })

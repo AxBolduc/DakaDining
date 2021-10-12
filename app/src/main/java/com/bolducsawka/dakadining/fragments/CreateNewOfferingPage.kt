@@ -65,6 +65,7 @@ class CreateNewOfferingPage : Fragment() {
 
         btnSubmitOffering.setOnClickListener {
 
+            //New offer request to the database
             val newOfferLiveData: LiveData<ResponseObject<Offer>> = BackendFetcher.get().newOffer(
                 Offer(
                     "temp",
@@ -78,9 +79,11 @@ class CreateNewOfferingPage : Fragment() {
             )
             newOfferLiveData.observe(viewLifecycleOwner, Observer {
                 if(it.status == 200){
+                    //success
                     Toast.makeText(context, "Offer Created", Toast.LENGTH_SHORT).show()
                     commonCallbacks?.onBack()
                 }else{
+                    //failure
                     Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
                 }
             })

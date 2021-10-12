@@ -103,6 +103,8 @@ class BuyerProfilePage : Fragment(){
         txtBuyerName.text = "${user.firstName} ${user.lastName}"
 
 
+
+        //implicit intent for camera
         imgProfilePic.setOnClickListener {
             dispatchTakePictureIntent()
         }
@@ -184,6 +186,8 @@ class BuyerProfilePage : Fragment(){
             }
     }
 
+
+    //Camera logic for profile pictures
 
     val REQUEST_IMAGE_CAPTURE = 1
 

@@ -131,7 +131,7 @@ class EditRequestPage: Fragment() {
         }
 
         btnSubmitRequest.setOnClickListener {
-            Log.d("LMAO", request.requestID)
+            //Update request request to database
             val updateRequestLiveData: LiveData<ResponseObject<Request>> = BackendFetcher.get().updateRequest(
                 Request(
                     request.requestID,
@@ -147,23 +147,27 @@ class EditRequestPage: Fragment() {
 
             updateRequestLiveData.observe(viewLifecycleOwner, Observer {
                 if(it.status == 200){
+                    //success
                     Toast.makeText(context, "Request Updated Successfully", Toast.LENGTH_SHORT).show()
                     commonCallbacks?.onBack()
                 }else{
+                    //fail
                     Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
                 }
             })
         }
 
         btnDeleteRequest.setOnClickListener {
-            Log.d("LMAO", request.requestID)
+            //Delete request request to databse
             val updateRequestLiveData: LiveData<ResponseObject<Request>> = BackendFetcher.get().deleteRequest(request)
 
             updateRequestLiveData.observe(viewLifecycleOwner, Observer {
                 if(it.status == 200){
+                    //success
                     Toast.makeText(context, "Request Deleted", Toast.LENGTH_SHORT).show()
                     commonCallbacks?.onBack()
                 }else{
+                    //fail
                     Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
                 }
             })

@@ -119,6 +119,9 @@ class CreateProfilePage : Fragment() {
         val createUserLiveData: LiveData<ResponseObject<LoginResponse>> = BackendFetcher.get().createUser(tempUser)
         createUserLiveData.observe(viewLifecycleOwner, Observer {
             if(it.status == 200) {
+                //success
+
+                //get user from databas to log in
                 val userResponseLiveData: LiveData<ResponseObject<User>> =
                     BackendFetcher.get().getUserBySessionID(it.data.sessionID)
                 userResponseLiveData.observe(viewLifecycleOwner, Observer {
@@ -132,13 +135,12 @@ class CreateProfilePage : Fragment() {
                 })
             }
             else{
+                //failure
                 Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
                 btnCreateSignUp.isEnabled = true
                 btnCreateCancel.isEnabled = true
             }
         })
-
-
 
         //Once create user is successful
         user?.let {

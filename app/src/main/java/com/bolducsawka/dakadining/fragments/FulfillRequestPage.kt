@@ -75,19 +75,12 @@ class FulfillRequestPage: Fragment() {
 
         btnFulfillRequest.setOnClickListener {
             //Decrease the user's meals by the number of swipes requested
-            //remove request from database
             val fillRequestLiveData: LiveData<ResponseObject<RequestFilledResponse>> = BackendFetcher.get().fillRequest(FillRequestData(request.requestID, user.userID))
             fillRequestLiveData.observe(viewLifecycleOwner, Observer {
                 if(it.status == 200){
-                    val updateMealsLiveData: LiveData<ResponseObject<MealsUpdateReponse>> = BackendFetcher.get().updateMealsBySessionID(user.session, false, request.meals)
-                    updateMealsLiveData.observe(viewLifecycleOwner, Observer {
-                        if(it.status == 200){
-                            Toast.makeText(context, "Request Filled", Toast.LENGTH_SHORT).show()
-                            callbacks?.onBack()
-                        }else{
-                            Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
-                        }
-                    })
+                    //success
+                    Toast.makeText(context, "Request Filled", Toast.LENGTH_SHORT).show()
+                    callbacks?.onBack()
                 }else{
                     Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
                 }

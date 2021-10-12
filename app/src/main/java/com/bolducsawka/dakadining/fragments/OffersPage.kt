@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -80,6 +81,7 @@ class OffersPage : Fragment() {
         offersRecyclerView = view.findViewById(R.id.offersRecyclerView) as RecyclerView
         offersRecyclerView.layoutManager = LinearLayoutManager(context)
 
+        //Remove the add button if user is the wrong role
         if(user.role == "Buyer"){
             imgAdd.visibility = View.INVISIBLE
         }
@@ -91,11 +93,15 @@ class OffersPage : Fragment() {
             callbacks?.onAdd(true, user.userID)
         }
         imgProfile.setOnClickListener {
-            //Determine if user is a seller or not
+            //get user data to pass to the profile page
             val userLiveData: LiveData<ResponseObject<User>> = BackendFetcher.get().getUserBySessionID(user.session)
             userLiveData.observe(viewLifecycleOwner, Observer {
                 if(it.status == 200) {
+                    //Success
                     callbacks?.onProfile(it.data)
+                }else{
+                    //Fail
+                    Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
                 }
             })
         }
@@ -108,10 +114,12 @@ class OffersPage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Setup the offerlist view model by getting offers and setting observer
         offerListViewModel.getOffers()
         offerListViewModel.offers?.observe(viewLifecycleOwner, Observer {
             if(it.status == 200){
                 offers = it.data.offers.filter {
+                    //Only show offers where status is false (ie. they havent been purchased yet)
                     !it.status
                 }
             }
@@ -124,6 +132,8 @@ class OffersPage : Fragment() {
         adapter = OfferAdapter(offers)
         offersRecyclerView.adapter = adapter
     }
+
+    //Recycler View classes
 
     private inner class OfferHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener{
         val txtNumOfSwipes: TextView = itemView.findViewById(R.id.txtNumOfSwipes)

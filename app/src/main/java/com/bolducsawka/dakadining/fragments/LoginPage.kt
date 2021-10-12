@@ -18,9 +18,7 @@ import com.bolducsawka.dakadining.api.BackendFetcher
 import com.bolducsawka.dakadining.api.requestobjects.LoginCredentials
 import com.bolducsawka.dakadining.api.responseobjects.LoginResponse
 import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
-import com.bolducsawka.dakadining.dakaApp
 import com.bolducsawka.dakadining.dataobjects.User
-import io.realm.mongodb.Credentials
 
 private const val TAG = "LoginPage"
 
@@ -79,22 +77,30 @@ class LoginPage : Fragment() {
         btnLogin.isEnabled = false
         btnSignUp.isEnabled = false
 
+
+        //Send login request
         val loginResponseLiveData: LiveData<ResponseObject<LoginResponse>> = BackendFetcher.get().loginUser(LoginCredentials(email, pass))
         loginResponseLiveData.observe(viewLifecycleOwner, Observer { loginResponse ->
             if(loginResponse.status == 200) {
+                //success
+
+                //Get authenticated user from session id to pass through application
                 val userResponseLiveData: LiveData<ResponseObject<User>> =
                     BackendFetcher.get().getUserBySessionID(loginResponse.data.sessionID)
                 userResponseLiveData.observe(viewLifecycleOwner, Observer { userResponse ->
                     if(userResponse.status == 200) {
-                        Log.d(TAG, userResponse.data.toString())
+                        //Success
                         user = userResponse.data
                         callbacks?.onUserLoggedIn(userResponse.data)
                     }else{
+                        //fail
                         Toast.makeText(context, userResponse.data.message, Toast.LENGTH_SHORT).show()
                     }
                 })
             }
             else{
+
+                //Failure
                 Toast.makeText(context, loginResponse.data.message, Toast.LENGTH_SHORT).show()
                 btnSignUp.isEnabled = true
                 btnLogin.isEnabled = true

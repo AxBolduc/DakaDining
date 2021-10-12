@@ -67,12 +67,13 @@ class PurchaseOfferingPage: Fragment() {
         imgBack = view.findViewById(R.id.imgBack)
 
 
+        //fill the text fields with data from passed in offer
         txtNumSwipes.text = "${offer.meals} swipes"
         txtOfferPrice.text = "$${offer.price}"
 
         btnAcceptOffer.setOnClickListener {
             //decrease meals in offerer's account
-            //remove offer from database
+            //mark the offer as purchased
             if(user.role == "Buyer") {
 
                 val takeOfferLiveData: LiveData<ResponseObject<OfferTakenResponse>> =
@@ -81,8 +82,12 @@ class PurchaseOfferingPage: Fragment() {
                     )
                 takeOfferLiveData.observe(viewLifecycleOwner, Observer {
                     if (it.status == 200) {
+                        //success
                         Toast.makeText(context, "Offer Purchased", Toast.LENGTH_SHORT).show()
                         callbacks?.onBack()
+                    }else{
+                        //fail
+                        Toast.makeText(context,  it.data.message, Toast.LENGTH_SHORT).show()
                     }
                 })
             }

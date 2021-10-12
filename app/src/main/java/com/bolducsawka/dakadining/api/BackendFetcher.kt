@@ -18,6 +18,9 @@ import java.lang.IllegalStateException
 
 private const val TAG = "BackendFetcher"
 
+/**
+ * Singleton that handles all of the retrofit requests that are defined in the DakaBackend interface
+ */
 class BackendFetcher private constructor(context: Context){
     private val dakaBackend: DakaBackend
 

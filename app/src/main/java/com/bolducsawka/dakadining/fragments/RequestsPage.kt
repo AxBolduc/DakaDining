@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -74,6 +75,7 @@ class RequestsPage : Fragment() {
         requestsRecyclerView = view.findViewById(R.id.offersRecyclerView) as RecyclerView
         requestsRecyclerView.layoutManager = LinearLayoutManager(context)
 
+        //Remove the add button if user is the wrong role
         if(user.role == "Seller"){
             imgAdd.visibility = View.INVISIBLE
         }
@@ -84,12 +86,18 @@ class RequestsPage : Fragment() {
         imgAdd.setOnClickListener {
             callbacks?.onAdd(false, user.userID)
         }
+
+
         imgProfile.setOnClickListener {
-            //Determine if the user is a seller or buyer
+            //get user data to pass to the profile page
             val userLiveData: LiveData<ResponseObject<User>> = BackendFetcher.get().getUserBySessionID(user.session)
             userLiveData.observe(viewLifecycleOwner, Observer {
                 if(it.status == 200) {
+                    //success
                     callbacks?.onProfile(it.data)
+                }else{
+                    //fail
+                    Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
                 }
             })
         }
@@ -101,10 +109,13 @@ class RequestsPage : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //setup view model by getting requests and starting observer
         requestListViewModel.getRequests()
         requestListViewModel.requests?.observe(viewLifecycleOwner, Observer {
             if(it.status == 200){
                 requests = it.data.requests.filter {
+                    //filter requests marked as not filled
                     !it.status
                 }
             }
@@ -117,6 +128,10 @@ class RequestsPage : Fragment() {
         adapter = RequestAdapter(requests)
         requestsRecyclerView.adapter = adapter
     }
+
+    //*******************
+    //RecyclerView Classes
+    //*******************
 
     private inner class RequestHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener{
         val txtNumOfSwipes: TextView = itemView.findViewById(R.id.txtNumOfSwipes)
@@ -131,7 +146,6 @@ class RequestsPage : Fragment() {
 
         override fun onClick(p0: View?) {
             heldRequest?.let { commonCallbacks?.onObjectClick(user, false, it, false) }
-            Log.d(TAG, "Clicked")
         }
     }
 

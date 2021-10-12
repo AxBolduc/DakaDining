@@ -77,6 +77,8 @@ class CreateNewRequestPage: Fragment() {
         txtInputTime.inputType = InputType.TYPE_NULL
 
         txtInputDate.setOnClickListener {
+
+            //Date Pickers
             val calendar = Calendar.getInstance()
             val day = calendar.get(Calendar.DAY_OF_MONTH)
             val month = calendar.get(Calendar.MONTH)
@@ -96,6 +98,7 @@ class CreateNewRequestPage: Fragment() {
         }
 
         txtInputTime.setOnClickListener {
+            //time picker
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
             val min = calendar.get(Calendar.MINUTE)
@@ -116,6 +119,7 @@ class CreateNewRequestPage: Fragment() {
         }
 
         btnSubmitRequest.setOnClickListener {
+            //create new request, request to backend
             val newRequestResponse: LiveData<ResponseObject<Request>> = BackendFetcher.get().newRequest(
                 Request(
                     "SAD",
@@ -131,9 +135,11 @@ class CreateNewRequestPage: Fragment() {
 
             newRequestResponse.observe(viewLifecycleOwner, Observer {
                 if(it.status == 200) {
+                    //success
                     Toast.makeText(context, "Request Created", Toast.LENGTH_SHORT).show()
                     commonCallbacks?.onBack()
                 }else{
+                    //fail
                     Toast.makeText(context, "Failed to create request", Toast.LENGTH_SHORT).show()
                 }
             })

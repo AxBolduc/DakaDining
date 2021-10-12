@@ -80,8 +80,6 @@ class SellerProfilePage : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         val view = inflater.inflate(R.layout.fragment_profile_seller_page, container, false)
 
         btnLogout = view.findViewById(R.id.btnLogout)
@@ -103,16 +101,17 @@ class SellerProfilePage : Fragment(){
         }
 
         btnUseSwipe.setOnClickListener {
-            //update UI
             if (user.meals != 0) {
-                //update database
+                //update the meals in the database
                 val updateMealsLiveData: LiveData<ResponseObject<MealsUpdateReponse>> =
                     BackendFetcher.get().updateMealsBySessionID(user.session, false, 1)
                 updateMealsLiveData.observe(viewLifecycleOwner, Observer {
                     if(it.status == 200){
+                        //success
                         user.meals = it.data.meals
                         updateUI()
                     }else{
+                        //fail
                         Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
                     }
                 })
@@ -123,7 +122,6 @@ class SellerProfilePage : Fragment(){
 
         imgProfilePic.setOnClickListener {
             dispatchTakePictureIntent()
-
         }
 
         profilePic.observe(viewLifecycleOwner, Observer {
@@ -159,6 +157,7 @@ class SellerProfilePage : Fragment(){
         txtNumSwipes.text = "${user.meals} swipes left"
 
         user.profilePic?.let {
+            //decode profile picure base64 string
             val decodedString: ByteArray = Base64.decode(it, Base64.DEFAULT)
             val decodedByte: Bitmap= BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
             imgProfilePic.setImageBitmap(decodedByte)
@@ -241,14 +240,16 @@ class SellerProfilePage : Fragment(){
             val encoded: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
             profilePic.value = encoded
 
+            //put the string in the database
             val profilePicLiveData: LiveData<ResponseObject<UpdatePictureResponse>> = BackendFetcher.get().updateProfilePicture(
                 UpdatePictureRequest(user.session, encoded)
             )
-
             profilePicLiveData.observe(viewLifecycleOwner, Observer {
                 if(it.status == 200){
+                    //success
                     Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
                 }else{
+                    //fail
                     Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
                 }
             })
