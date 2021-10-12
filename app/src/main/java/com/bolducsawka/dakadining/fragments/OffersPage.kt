@@ -22,6 +22,7 @@ import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.dataobjects.Request
 import com.bolducsawka.dakadining.dataobjects.SwipeObject
 import com.bolducsawka.dakadining.dataobjects.User
+import com.bolducsawka.dakadining.navigation.CommonCallbacks
 import com.bolducsawka.dakadining.viewmodels.OfferListViewModel
 
 private const val ARG_USER = "user"
@@ -33,7 +34,6 @@ class OffersPage : Fragment() {
         fun swapPages(user: User, fromOffers: Boolean)
         fun onAdd(fromOffers:Boolean, userID: String)
         fun onProfile(user: User)
-        fun onObjectClick(user: User, fromOffers: Boolean, swipeObject: SwipeObject)
     }
 
     private var offers: List<Offer> = mutableListOf()
@@ -52,6 +52,7 @@ class OffersPage : Fragment() {
     }
 
     private var callbacks: Callbacks? = null
+    private var commonCallbacks: CommonCallbacks? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +64,7 @@ class OffersPage : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as Callbacks
+        commonCallbacks = context as CommonCallbacks
     }
 
     override fun onCreateView(
@@ -137,7 +139,7 @@ class OffersPage : Fragment() {
 
         override fun onClick(p0: View?) {
             if(user.role == "Buyer"){
-                heldOffer?.let { callbacks?.onObjectClick(user, true, it) }
+                heldOffer?.let { commonCallbacks?.onObjectClick(user, true, it, false) }
             }
         }
     }
@@ -164,6 +166,7 @@ class OffersPage : Fragment() {
     override fun onDetach() {
         super.onDetach()
         callbacks = null
+        commonCallbacks = null
     }
 
     companion object {

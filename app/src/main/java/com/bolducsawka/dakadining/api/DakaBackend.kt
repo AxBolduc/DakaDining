@@ -43,4 +43,10 @@ interface DakaBackend {
     @POST("/api/offers/takeOffer")
     fun takeOffer(@Body takeOffer: TakeOfferData): Call<ResponseObject<OfferTakenResponse>>
 
+    @POST("/api/requests/updateRequest")
+    fun updateRequest(@Body updatedRequest: Request): Call<ResponseObject<Request>>
+
+    @POST("/api/requests/deleteRequest")
+    fun deleteRequest(@Body deleteRequest: Request): Call<ResponseObject<Request>>
+
 }

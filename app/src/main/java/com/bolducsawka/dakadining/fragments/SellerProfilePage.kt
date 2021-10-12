@@ -165,10 +165,20 @@ class SellerProfilePage : Fragment(){
         }
     }
 
-    private inner class OfferHolder(view: View): RecyclerView.ViewHolder(view){
+    private inner class OfferHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener{
         val txtNumOfSwipes: TextView = itemView.findViewById(R.id.txtNumOfSwipes)
         val txtRequestPrice: TextView = itemView.findViewById(R.id.txtRequestPrice)
         val txtRequestDateTime: TextView = itemView.findViewById(R.id.txtRequestDateTime)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        var heldOffer: Offer? = null
+
+        override fun onClick(p0: View?) {
+            heldOffer?.let { callbacks?.onObjectClick(user, true, it, true) }
+        }
     }
 
     private inner class OfferAdapter(var crimes: List<Offer>): RecyclerView.Adapter<OfferHolder>(){
@@ -183,6 +193,8 @@ class SellerProfilePage : Fragment(){
                 txtNumOfSwipes.setText("${offer.meals.toString()} swipes")
                 txtRequestPrice.setText(offer.price.toString())
                 txtRequestDateTime.visibility = View.INVISIBLE
+
+                heldOffer = offer
             }
         }
 

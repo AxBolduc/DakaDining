@@ -127,10 +127,22 @@ class BuyerProfilePage : Fragment(){
         requestsRecyclerView.adapter = adapter
     }
 
-    private inner class RequestHolder(view: View): RecyclerView.ViewHolder(view){
+    private inner class RequestHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener{
         val txtNumOfSwipes: TextView = itemView.findViewById(R.id.txtNumOfSwipes)
         val txtRequestPrice: TextView = itemView.findViewById(R.id.txtRequestPrice)
         val txtRequestDateTime: TextView = itemView.findViewById(R.id.txtRequestDateTime)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        var heldRequest: Request? = null
+
+        override fun onClick(p0: View?) {
+            heldRequest?.let {
+                callbacks?.onObjectClick(user, false, it, true)
+            }
+        }
     }
 
     private inner class RequestAdapter(var crimes: List<Request>): RecyclerView.Adapter<RequestHolder>(){
@@ -146,6 +158,7 @@ class BuyerProfilePage : Fragment(){
                 txtRequestPrice.setText(request.price.toString())
                 txtRequestDateTime.setText(request.time.time.toString())
 
+                heldRequest = request
             }
         }
 

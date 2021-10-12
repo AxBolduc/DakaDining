@@ -117,12 +117,20 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
             .commit()
     }
 
-    override fun onObjectClick(user: User, fromOffers: Boolean, swipeObject: SwipeObject) {
+    override fun onObjectClick(user: User, fromOffers: Boolean, swipeObject: SwipeObject, toEdit: Boolean) {
         var fragment: Fragment?= null
-        if(fromOffers){
-            fragment = PurchaseOfferingPage.newInstance(user, swipeObject)
+        if(!toEdit) {
+            if (fromOffers) {
+                fragment = PurchaseOfferingPage.newInstance(user, swipeObject)
+            } else {
+                fragment = FulfillRequestPage.newInstance(user, swipeObject)
+            }
         }else{
-            fragment = FulfillRequestPage.newInstance(user, swipeObject)
+            if(fromOffers){
+                fragment = EditOfferingPage.newInstance(user, swipeObject)
+            }else{
+                fragment = EditRequestPage.newInstance(user, swipeObject)
+            }
         }
 
         supportFragmentManager.beginTransaction()

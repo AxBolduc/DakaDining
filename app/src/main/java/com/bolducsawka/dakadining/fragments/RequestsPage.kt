@@ -20,6 +20,7 @@ import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
 import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.dataobjects.Request
 import com.bolducsawka.dakadining.dataobjects.User
+import com.bolducsawka.dakadining.navigation.CommonCallbacks
 import com.bolducsawka.dakadining.viewmodels.RequestListViewModel
 
 private const val ARG_USER = "user"
@@ -42,6 +43,7 @@ class RequestsPage : Fragment() {
     }
 
     private var callbacks: OffersPage.Callbacks? = null
+    private var commonCallbacks: CommonCallbacks? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +56,7 @@ class RequestsPage : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as OffersPage.Callbacks
+        commonCallbacks = context as CommonCallbacks
     }
 
     override fun onCreateView(
@@ -125,7 +128,7 @@ class RequestsPage : Fragment() {
         var heldRequest: Request? = null
 
         override fun onClick(p0: View?) {
-            heldRequest?.let { callbacks?.onObjectClick(user, false, it) }
+            heldRequest?.let { commonCallbacks?.onObjectClick(user, false, it, false) }
             Log.d(TAG, "Clicked")
         }
     }
@@ -154,6 +157,7 @@ class RequestsPage : Fragment() {
     override fun onDetach() {
         super.onDetach()
         callbacks = null
+        commonCallbacks = null
     }
 
     companion object {
