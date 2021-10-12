@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Daka Dining</string>
+    <string name="txtLogoDescription">形象标识</string>
+    <string name="txtUsername">用户名</string>
+    <string name="txtPassword">密码</string>
+    <string name="txtNoAccount">没有账户？</string>
+    <string name="txtSignUp">注册</string>
+    <string name="txtLogIn">登录</string>
+    <string name="txtCreateProfile">创建个人资料</string>
+    <string name="txtCreateFirstName">名</string>
+    <string name="txtCreateLastName">姓</string>
+    <string name="txtCreateEmail">电子邮件</string>
+    <string name="txtMealPlan"><u>进食计划</u></string>
+    <string name="txtNineteen">19/星期</string>
+    <string name="txtTwoHundred">200/学期</string>
+    <string name="txtFourteen">14/星期</string>
+    <string name="txtNone">没有任何</string>
+    <string name="txtChangedMind">改变主意了吗？</string>
+    <string name="txtCancel">取消</string>
+    <string name="txtNewOffering">新产品</string>
+    <string name="txtNumSwipes"># 滑动次数</string>
+    <string name="txtMoneyOffer">多少钱？ $</string>
+    <string name="txtSubmitOffering">提交产品</string>
+    <string name="txtNewRequest">新请求</string>
+    <string name="txtSubmitRequest">提交请求</string>
+    <string name="txtTime">时间</string>
+    <string name="txtOutgoingRequests"><u>传出请求</u></string>
+    <string name="txtOutgoingOfferings">发出的供品</string>
+    <string name="txtUseSwipe">刷卡使用</string>
+    <string name="txtDate">日期</string>
+    <string name="txtPrice">价钱</string>
+    <string name="edit_offer">编辑报价</string>
+    <string name="delete_offer">删除报价</string>
+    <string name="edit_request">编辑请求</string>
+    <string name="delete_request">删除请求</string>
+    <string name="fulfill_request">完成请求</string>
+    <string name="name">姓名</string>
+    <string name="swipes_left"># 向左滑动</string>
+    <string name="purchase_offering">购买产品</string>
+    <string name="accept_offer">接受报价</string>
+    <string name="requests">要求</string>
+
+
+    <string-array name="arrMealPlans">
+        <item>19/星期</item>
+        <item>14/星期</item>
+        <item>200/学期</item>
+        <item>没有任何</item>
+    </string-array>
+</resources>

@@ -1,3 +1,50 @@
 <resources>
     <string name="app_name">Daka Dining</string>
+    <string name="txtLogoDescription">Logo Image</string>
+    <string name="txtUsername">Username</string>
+    <string name="txtPassword">Password</string>
+    <string name="txtNoAccount">Don\'t have an account?</string>
+    <string name="txtSignUp">Sign Up</string>
+    <string name="txtLogIn">Log In</string>
+    <string name="txtCreateProfile">Create Profile</string>
+    <string name="txtCreateFirstName">First Name</string>
+    <string name="txtCreateLastName">Last Name</string>
+    <string name="txtCreateEmail">Email</string>
+    <string name="txtMealPlan"><u>Meal Plan</u></string>
+    <string name="txtNineteen">19/week</string>
+    <string name="txtTwoHundred">200/semester</string>
+    <string name="txtFourteen">14/week</string>
+    <string name="txtNone">None</string>
+    <string name="txtChangedMind">Changed your mind?</string>
+    <string name="txtCancel">Cancel</string>
+    <string name="txtNewOffering">New Offering</string>
+    <string name="txtNumSwipes"># of Swipes</string>
+    <string name="txtMoneyOffer">For How Much? $</string>
+    <string name="txtSubmitOffering">Submit offer</string>
+    <string name="txtNewRequest">New Request</string>
+    <string name="txtSubmitRequest">Submit Request</string>
+    <string name="txtTime">Time</string>
+    <string name="txtOutgoingRequests"><u>Outgoing Requests</u></string>
+    <string name="txtOutgoingOfferings">Outgoing Offerings</string>
+    <string name="txtUseSwipe">Swipe Used</string>
+    <string name="txtDate">Date</string>
+    <string name="txtPrice">Price</string>
+    <string name="edit_offer">Edit Offer</string>
+    <string name="delete_offer">Delete offer</string>
+    <string name="edit_request">Edit Request</string>
+    <string name="delete_request">Delete Request</string>
+    <string name="fulfill_request">Fulfill Request</string>
+    <string name="name">Name</string>
+    <string name="swipes_left"># Swipes Left</string>
+    <string name="purchase_offering">Purchase Offering</string>
+    <string name="accept_offer">Accept Offer</string>
+    <string name="requests">Requests</string>
+
+
+    <string-array name="arrMealPlans">
+        <item>19/week</item>
+        <item>14/week</item>
+        <item>200/semester</item>
+        <item>None</item>
+    </string-array>
 </resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Daka Dining</string>
+    <string name="txtLogoDescription">Logotipo</string>
+    <string name="txtUsername">Nombre de usuario</string>
+    <string name="txtPassword">Contraseña</string>
+    <string name="txtNoAccount">¿No tienes una cuenta?</string>
+    <string name="txtSignUp">Inscribirse</string>
+    <string name="txtLogIn">Iniciar sesión</string>
+    <string name="txtCreateProfile">Crear perfil</string>
+    <string name="txtCreateFirstName">Primer nombre</string>
+    <string name="txtCreateLastName">Apellido</string>
+    <string name="txtCreateEmail">Correo electrónico</string>
+    <string name="txtMealPlan"><u>Régimen de comidas</u></string>
+    <string name="txtNineteen">19/semana</string>
+    <string name="txtTwoHundred">200/semestre</string>
+    <string name="txtFourteen">14/semana</string>
+    <string name="txtNone">Ninguno</string>
+    <string name="txtChangedMind">¿Cambiaste de opinión?</string>
+    <string name="txtCancel">Cancelar</string>
+    <string name="txtNewOffering">Nueva Oferta</string>
+    <string name="txtNumSwipes"># de Golpes</string>
+    <string name="txtMoneyOffer">¿Por cuanto? $</string>
+    <string name="txtSubmitOffering">Presentar oferta</string>
+    <string name="txtNewRequest">Nueva solicitud</string>
+    <string name="txtSubmitRequest">Enviar peticion</string>
+    <string name="txtTime">Tiempo</string>
+    <string name="txtOutgoingRequests"><u>Solicitudes salientes</u></string>
+    <string name="txtOutgoingOfferings">Ofrendas salientes</string>
+    <string name="txtUseSwipe">Deslizar usado</string>
+    <string name="txtDate">Fecha</string>
+    <string name="txtPrice">Precio</string>
+    <string name="edit_offer">Editar oferta</string>
+    <string name="delete_offer">Eliminar oferta</string>
+    <string name="edit_request">Editar solicitud</string>
+    <string name="delete_request">Borrar petición</string>
+    <string name="fulfill_request">Cumplir con la solicitud</string>
+    <string name="name">Nombre</string>
+    <string name="swipes_left"># Desliza hacia la izquierda</string>
+    <string name="purchase_offering">Oferta de compra</string>
+    <string name="accept_offer">Aceptar la oferta</string>
+    <string name="requests">Peticiones</string>
+
+
+    <string-array name="arrMealPlans">
+        <item>19/semana</item>
+        <item>14/semana</item>
+        <item>200/semestre</item>
+        <item>Ninguno</item>
+    </string-array>
+
+
+</resources>
+

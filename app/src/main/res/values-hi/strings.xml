@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Daka Dining</string>
+    <string name="txtLogoDescription">लोगो छवि</string>
+    <string name="txtUsername">उपयोगकर्ता नाम</string>
+    <string name="txtPassword">पासवर्ड</string>
+    <string name="txtNoAccount">खाता नहीं है?</string>
+    <string name="txtSignUp">साइन अप करें</string>
+    <string name="txtLogIn">लॉग इन करें</string>
+    <string name="txtCreateProfile">प्रोफ़ाइल बनाने</string>
+    <string name="txtCreateFirstName">पहला नाम</string>
+    <string name="txtCreateLastName">उपनाम</string>
+    <string name="txtCreateEmail">ईमेल</string>
+    <string name="txtMealPlan"><u>भोजन योजना</u></string>
+    <string name="txtNineteen">19/सप्ताह</string>
+    <string name="txtTwoHundred">200/छमाही</string>
+    <string name="txtFourteen">14/सप्ताह</string>
+    <string name="txtNone">कोई नहीं</string>
+    <string name="txtChangedMind">अपने मन बदल दिया?</string>
+    <string name="txtCancel">रद्द करें</string>
+    <string name="txtNewOffering">नई पेशकश</string>
+    <string name="txtNumSwipes"># स्वाइप के</string>
+    <string name="txtMoneyOffer">कितने में? $</string>
+    <string name="txtSubmitOffering">प्रस्ताव जमा करें</string>
+    <string name="txtNewRequest">नई विनती</string>
+    <string name="txtSubmitRequest">अनुरोध प्रस्तुत करें</string>
+    <string name="txtTime">समय</string>
+    <string name="txtOutgoingRequests"><u>आउटगोइंग अनुरोध</u></string>
+    <string name="txtOutgoingOfferings">आउटगोइंग प्रसाद</string>
+    <string name="txtUseSwipe">इस्तेमाल किया स्वाइप करें</string>
+    <string name="txtDate">दिनांक</string>
+    <string name="txtPrice">कीमत</string>
+     <string name="edit_offer">ऑफ़र संपादित करें</string>
+    <string name="delete_offer">ऑफ़र हटाएं</string>
+    <string name="edit_request">अनुरोध संपादित करें</string>
+    <string name="delete_request">अनुरोध हटा दें</string>
+    <string name="fulfill_request">अनुरोध पूरा करेंt</string>
+    <string name="name">नाम</string>
+    <string name="swipes_left"># स्वाइप लेफ्ट</string>
+    <string name="purchase_offering">खरीदारी की पेशकश</string>
+    <string name="accept_offer">प्रस्ताव स्वीकार करें</string>
+    <string name="requests">अनुरोध</string>
+
+    <string-array name="arrMealPlans">
+        <item>19/सप्ताह</item>
+        <item>14/सप्ताह</item>
+        <item>200/छमाही</item>
+        <item>None</item>
+    </string-array>
+</resources>
