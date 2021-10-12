@@ -8,20 +8,29 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.bolducsawka.dakadining.R
+import com.bolducsawka.dakadining.api.BackendFetcher
+import com.bolducsawka.dakadining.api.requestobjects.TakeOfferData
+import com.bolducsawka.dakadining.api.responseobjects.MealsUpdateReponse
+import com.bolducsawka.dakadining.api.responseobjects.OfferTakenResponse
+import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
 import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.dataobjects.SwipeObject
+import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
 
 
-private const val ARG_USERID = "userid"
+private const val ARG_USER = "userid"
 private const val ARG_OBJ = "object"
 private const val TAG = "PurchaseOfferingPage"
 
 class PurchaseOfferingPage: Fragment() {
 
-    private lateinit var userID: String
+    private lateinit var user: User
     private lateinit var offer: Offer
 
     private var callbacks: CommonCallbacks? = null
@@ -35,7 +44,7 @@ class PurchaseOfferingPage: Fragment() {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            userID = it.getSerializable(ARG_USERID) as String
+            user = it.getSerializable(ARG_USER) as User
             offer = it.getSerializable(ARG_OBJ) as Offer
         }
     }
@@ -64,8 +73,19 @@ class PurchaseOfferingPage: Fragment() {
         btnAcceptOffer.setOnClickListener {
             //decrease meals in offerer's account
             //remove offer from database
+            if(user.role == "Buyer") {
 
-            callbacks?.onBack()
+                val takeOfferLiveData: LiveData<ResponseObject<OfferTakenResponse>> =
+                    BackendFetcher.get().takeOffer(
+                        TakeOfferData(offer.offerID, user.userID)
+                    )
+                takeOfferLiveData.observe(viewLifecycleOwner, Observer {
+                    if (it.status == 200) {
+                        Toast.makeText(context, "RequestFilled", Toast.LENGTH_SHORT).show()
+                        callbacks?.onBack()
+                    }
+                })
+            }
         }
 
         imgBack.setOnClickListener {
@@ -82,10 +102,10 @@ class PurchaseOfferingPage: Fragment() {
     }
 
     companion object{
-        fun newInstance(userID: String, swipeObject: SwipeObject) =
+        fun newInstance(user: User, swipeObject: SwipeObject) =
             PurchaseOfferingPage().apply {
                 arguments = Bundle().apply {
-                    putSerializable(ARG_USERID, userID)
+                    putSerializable(ARG_USER, user)
                     putSerializable(ARG_OBJ, swipeObject)
                 }
             }

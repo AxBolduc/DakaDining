@@ -73,10 +73,12 @@ class CreateNewOfferingPage : Fragment() {
 
             val newOfferLiveData: LiveData<ResponseObject<Offer>> = BackendFetcher.get().newOffer(
                 Offer(
+                    "temp",
                     userID,
                     Integer.parseInt(txtInputNumSwipes.text.toString()),
                     Integer.parseInt(txtInputOfferingPrice.text.toString()),
                     false,
+                    null,
                     null
                 )
             )
@@ -85,7 +87,7 @@ class CreateNewOfferingPage : Fragment() {
                     Toast.makeText(context, "Offer Created", Toast.LENGTH_SHORT).show()
                     callbacks?.onNewSubmit(true)
                 }else{
-                    Toast.makeText(context, "Failed to create offer", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
                 }
             })
 

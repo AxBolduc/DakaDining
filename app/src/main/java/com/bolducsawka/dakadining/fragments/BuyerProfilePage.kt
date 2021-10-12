@@ -115,7 +115,7 @@ class BuyerProfilePage : Fragment(){
         requestListViewModel.requests?.observe(viewLifecycleOwner, Observer {
             if(it.status == 200){
                 requests = it.data.requests.filter {
-                    it.requester == user.userID
+                    it.requester == user.userID && !it.status
                 }
             }
             updateUI()

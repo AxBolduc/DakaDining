@@ -125,7 +125,7 @@ class RequestsPage : Fragment() {
         var heldRequest: Request? = null
 
         override fun onClick(p0: View?) {
-            heldRequest?.let { callbacks?.onObjectClick(user.userID, false, it) }
+            heldRequest?.let { callbacks?.onObjectClick(user, false, it) }
             Log.d(TAG, "Clicked")
         }
     }

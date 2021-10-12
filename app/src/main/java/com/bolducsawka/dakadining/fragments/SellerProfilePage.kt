@@ -109,8 +109,12 @@ class SellerProfilePage : Fragment(){
                 val updateMealsLiveData: LiveData<ResponseObject<MealsUpdateReponse>> =
                     BackendFetcher.get().updateMealsBySessionID(user.session, false, 1)
                 updateMealsLiveData.observe(viewLifecycleOwner, Observer {
-                    user.meals = it.data.meals
-                    updateUI()
+                    if(it.status == 200){
+                        user.meals = it.data.meals
+                        updateUI()
+                    }else{
+                        Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
+                    }
                 })
             } else {
                 Toast.makeText(context, "You're out of swipes", Toast.LENGTH_SHORT).show()
@@ -139,7 +143,7 @@ class SellerProfilePage : Fragment(){
         offerListViewModel.offers?.observe(viewLifecycleOwner, Observer {
             if(it.status == 200){
                 offers = it.data.offers.filter {
-                    it.offerer == user.userID
+                    it.offerer == user.userID && !it.status
                 }
             }
 

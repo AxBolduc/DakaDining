@@ -4,9 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.bolducsawka.dakadining.api.requestobjects.CreateUserRequest
-import com.bolducsawka.dakadining.api.requestobjects.LoginCredentials
-import com.bolducsawka.dakadining.api.requestobjects.UpdatePictureRequest
+import com.bolducsawka.dakadining.api.requestobjects.*
 import com.bolducsawka.dakadining.api.responseobjects.*
 import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.dataobjects.Request
@@ -214,6 +212,52 @@ class BackendFetcher private constructor(context: Context){
             }
 
             override fun onFailure(call: Call<ResponseObject<GetOffersResponse>>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+
+        return responseLiveData
+    }
+
+    fun fillRequest(fillRequest: FillRequestData): LiveData<ResponseObject<RequestFilledResponse>>{
+        val responseLiveData: MutableLiveData<ResponseObject<RequestFilledResponse>> = MutableLiveData()
+        val backendRequest: Call<ResponseObject<RequestFilledResponse>> = dakaBackend.fillRequest(fillRequest)
+
+        backendRequest.enqueue(object : Callback<ResponseObject<RequestFilledResponse>>{
+            override fun onResponse(
+                call: Call<ResponseObject<RequestFilledResponse>>,
+                response: Response<ResponseObject<RequestFilledResponse>>
+            ) {
+                responseLiveData.value = response.body()
+            }
+
+            override fun onFailure(
+                call: Call<ResponseObject<RequestFilledResponse>>,
+                t: Throwable
+            ) {
+                t.printStackTrace()
+            }
+        })
+
+        return responseLiveData
+    }
+
+    fun takeOffer(takeOffer: TakeOfferData): LiveData<ResponseObject<OfferTakenResponse>>{
+        val responseLiveData: MutableLiveData<ResponseObject<OfferTakenResponse>> = MutableLiveData()
+        val backendRequest: Call<ResponseObject<OfferTakenResponse>> = dakaBackend.takeOffer(takeOffer)
+
+        backendRequest.enqueue(object : Callback<ResponseObject<OfferTakenResponse>>{
+            override fun onResponse(
+                call: Call<ResponseObject<OfferTakenResponse>>,
+                response: Response<ResponseObject<OfferTakenResponse>>
+            ) {
+                responseLiveData.value = response.body()
+            }
+
+            override fun onFailure(
+                call: Call<ResponseObject<OfferTakenResponse>>,
+                t: Throwable
+            ) {
                 t.printStackTrace()
             }
         })

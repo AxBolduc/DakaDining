@@ -120,6 +120,7 @@ class CreateNewRequestPage: Fragment() {
         btnSubmitRequest.setOnClickListener {
             val newRequestResponse: LiveData<ResponseObject<Request>> = BackendFetcher.get().newRequest(
                 Request(
+                    "SAD",
                     userID,
                     Integer.parseInt(txtInputNumSwipes.text.toString()),
                     Integer.parseInt(txtInputPrice.text.toString()),

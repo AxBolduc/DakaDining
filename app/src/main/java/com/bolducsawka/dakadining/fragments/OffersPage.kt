@@ -33,7 +33,7 @@ class OffersPage : Fragment() {
         fun swapPages(user: User, fromOffers: Boolean)
         fun onAdd(fromOffers:Boolean, userID: String)
         fun onProfile(user: User)
-        fun onObjectClick(userID: String, fromOffers: Boolean, swipeObject: SwipeObject)
+        fun onObjectClick(user: User, fromOffers: Boolean, swipeObject: SwipeObject)
     }
 
     private var offers: List<Offer> = mutableListOf()
@@ -110,7 +110,7 @@ class OffersPage : Fragment() {
         offerListViewModel.offers?.observe(viewLifecycleOwner, Observer {
             if(it.status == 200){
                 offers = it.data.offers.filter {
-                    it.status
+                    !it.status
                 }
             }
 
@@ -137,7 +137,7 @@ class OffersPage : Fragment() {
 
         override fun onClick(p0: View?) {
             if(user.role == "Buyer"){
-                heldOffer?.let { callbacks?.onObjectClick(user.userID, true, it) }
+                heldOffer?.let { callbacks?.onObjectClick(user, true, it) }
             }
         }
     }

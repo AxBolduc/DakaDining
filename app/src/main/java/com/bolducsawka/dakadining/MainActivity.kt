@@ -117,12 +117,12 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
             .commit()
     }
 
-    override fun onObjectClick(userID: String, fromOffers: Boolean, swipeObject: SwipeObject) {
+    override fun onObjectClick(user: User, fromOffers: Boolean, swipeObject: SwipeObject) {
         var fragment: Fragment?= null
         if(fromOffers){
-            fragment = PurchaseOfferingPage.newInstance(userID, swipeObject)
+            fragment = PurchaseOfferingPage.newInstance(user, swipeObject)
         }else{
-            fragment = FulfillRequestPage.newInstance(userID, swipeObject)
+            fragment = FulfillRequestPage.newInstance(user, swipeObject)
         }
 
         supportFragmentManager.beginTransaction()
