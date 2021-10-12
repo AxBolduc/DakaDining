@@ -81,7 +81,7 @@ class PurchaseOfferingPage: Fragment() {
                     )
                 takeOfferLiveData.observe(viewLifecycleOwner, Observer {
                     if (it.status == 200) {
-                        Toast.makeText(context, "RequestFilled", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Offer Purchased", Toast.LENGTH_SHORT).show()
                         callbacks?.onBack()
                     }
                 })

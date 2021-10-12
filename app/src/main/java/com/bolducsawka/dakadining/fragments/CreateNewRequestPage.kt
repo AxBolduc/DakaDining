@@ -21,6 +21,7 @@ import com.bolducsawka.dakadining.api.BackendFetcher
 import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
 import com.bolducsawka.dakadining.dataobjects.Request
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
+import java.text.SimpleDateFormat
 import java.util.*
 
 private const val ARG_USERID = "userid"
@@ -88,10 +89,10 @@ class CreateNewRequestPage: Fragment() {
             datePicker = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
                 date.let {
                     it.year = year;
-                    it.month = month+1;
+                    it.month = month;
                     it.date = day
                 }
-                txtInputDate.setText("${month+1}/${day}/${year}")
+                txtInputDate.setText(SimpleDateFormat("MM/dd/yy", Locale.getDefault()).format(date))
             }, year, month, day)
 
             datePicker.show()
@@ -107,7 +108,7 @@ class CreateNewRequestPage: Fragment() {
                     it.hours = hour
                     it.minutes = min
                 }
-                txtInputTime.setText("${hour}:${min}")
+                txtInputTime.setText(SimpleDateFormat("hh:mm", Locale.getDefault()).format(date))
             }, hour, min, false)
 
             timePicker.show()

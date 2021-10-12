@@ -23,6 +23,8 @@ import com.bolducsawka.dakadining.dataobjects.SwipeObject
 import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
 import kotlinx.android.synthetic.main.fragment_create_profile_page.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 private const val ARG_USER = "user"
 private const val ARG_OBJ = "object"
@@ -68,7 +70,7 @@ class FulfillRequestPage: Fragment() {
         imgBack = view.findViewById(R.id.imgBack)
 
         txtNumSwipes.text = "${request.meals} swipes"
-        txtDateTime.text = "${request.time.month}/${request.time.date}/${request.time.year} ${request.time.hours}:${request.time.minutes}"
+        txtDateTime.text = SimpleDateFormat("MM/dd/yy hh:mm", Locale.getDefault()).format(request.time)
         txtReqPrice.text = "$${request.price}"
 
         btnFulfillRequest.setOnClickListener {

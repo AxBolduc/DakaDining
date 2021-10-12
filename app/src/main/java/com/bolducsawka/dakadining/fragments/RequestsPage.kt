@@ -22,6 +22,8 @@ import com.bolducsawka.dakadining.dataobjects.Request
 import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
 import com.bolducsawka.dakadining.viewmodels.RequestListViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 private const val ARG_USER = "user"
 private const val TAG = "RequestsPage"
@@ -141,10 +143,11 @@ class RequestsPage : Fragment() {
 
         override fun onBindViewHolder(holder: RequestHolder, position: Int) {
             val request = requests[position]
+            val sdf = SimpleDateFormat("MM/dd/yy hh:mm", Locale.getDefault())
             holder.apply{
                 txtNumOfSwipes.setText("${request.meals.toString()} swipes")
-                txtRequestPrice.setText(request.price.toString())
-                txtRequestDateTime.setText(request.time.time.toString())
+                txtRequestPrice.setText("$${request.price.toString()}")
+                txtRequestDateTime.setText(sdf.format(request.time))
 
                 heldRequest = request
 

@@ -191,7 +191,7 @@ class SellerProfilePage : Fragment(){
             val offer = offers[position]
             holder.apply{
                 txtNumOfSwipes.setText("${offer.meals.toString()} swipes")
-                txtRequestPrice.setText(offer.price.toString())
+                txtRequestPrice.setText("$${offer.price.toString()}")
                 txtRequestDateTime.visibility = View.INVISIBLE
 
                 heldOffer = offer
