@@ -8,8 +8,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.bolducsawka.dakadining.R
+import com.bolducsawka.dakadining.api.BackendFetcher
+import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
 import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.dataobjects.SwipeObject
 import com.bolducsawka.dakadining.dataobjects.User
@@ -73,10 +78,42 @@ class EditOfferingPage : Fragment() {
 
         btnSubmitOffering.setOnClickListener {
             //TODO: Update Offer
+            val updateOfferLiveData: LiveData<ResponseObject<Offer>> = BackendFetcher.get().updateOffer(
+                Offer(
+                    offer.offerID,
+                    offer.offerer,
+                    Integer.parseInt(txtInputNumSwipes.text.toString()),
+                    Integer.parseInt(txtInputOfferingPrice.text.toString()),
+                    false,
+                    null,
+                    null
+                )
+            )
+            
+            updateOfferLiveData.observe(viewLifecycleOwner, Observer {
+                if(it.status == 200){
+                    Toast.makeText(context, "Offering Updated", Toast.LENGTH_SHORT).show()
+                    commonCallbacks?.onBack()
+                }else{
+                    Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
+                }
+            })
+
         }
 
         btnDeleteOffer.setOnClickListener {
             //TODO: Delete offer
+            val deleteOfferLiveData: LiveData<ResponseObject<Offer>> = BackendFetcher.get().deleteOffer(offer)
+
+            deleteOfferLiveData.observe(viewLifecycleOwner, Observer {
+                if(it.status == 200){
+                    Toast.makeText(context, "Offering Deleted", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
+                    commonCallbacks?.onBack()
+                }
+            })
+
         }
 
 

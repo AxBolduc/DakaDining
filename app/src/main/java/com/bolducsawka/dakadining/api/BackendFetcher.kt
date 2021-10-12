@@ -305,6 +305,50 @@ class BackendFetcher private constructor(context: Context){
         return responseLiveData
     }
 
+    fun updateOffer(updateOffer: Offer): LiveData<ResponseObject<Offer>>{
+        val responseLiveData: MutableLiveData<ResponseObject<Offer>> = MutableLiveData()
+        val backendRequest: Call<ResponseObject<Offer>> = dakaBackend.updateOffer(updateOffer)
+
+        backendRequest.enqueue(object : Callback<ResponseObject<Offer>> {
+            override fun onResponse(
+                call: Call<ResponseObject<Offer>>,
+                response: Response<ResponseObject<Offer>>
+            ) {
+                responseLiveData.value = response.body()
+            }
+
+            override fun onFailure(call: Call<ResponseObject<Offer>>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+
+        return responseLiveData
+    }
+
+    fun deleteOffer(deleteOffer: Offer): LiveData<ResponseObject<Offer>>{
+        val responseLiveData: MutableLiveData<ResponseObject<Offer>> = MutableLiveData()
+        val backendRequest: Call<ResponseObject<Offer>> = dakaBackend.deleteOffer(deleteOffer)
+
+        backendRequest.enqueue(object : Callback<ResponseObject<Offer>> {
+            override fun onResponse(
+                call: Call<ResponseObject<Offer>>,
+                response: Response<ResponseObject<Offer>>
+            ) {
+                responseLiveData.value = response.body()
+            }
+
+            override fun onFailure(call: Call<ResponseObject<Offer>>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+
+        return responseLiveData
+    }
+
+
+
     companion object{
         private var INSTANCE: BackendFetcher? = null;
         fun initialize(context: Context){
