@@ -131,7 +131,6 @@ class EditRequestPage: Fragment() {
         }
 
         btnSubmitRequest.setOnClickListener {
-            //TODO: Update request
             Log.d("LMAO", request.requestID)
             val updateRequestLiveData: LiveData<ResponseObject<Request>> = BackendFetcher.get().updateRequest(
                 Request(
@@ -157,7 +156,6 @@ class EditRequestPage: Fragment() {
         }
 
         btnDeleteRequest.setOnClickListener {
-            //TODO: Delete Request
             Log.d("LMAO", request.requestID)
             val updateRequestLiveData: LiveData<ResponseObject<Request>> = BackendFetcher.get().deleteRequest(request)
 

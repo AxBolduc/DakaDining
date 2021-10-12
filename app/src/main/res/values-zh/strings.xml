@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Daka Dining</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txtLogoDescription">形象标识</string>
     <string name="txtUsername">用户名</string>
     <string name="txtPassword">密码</string>

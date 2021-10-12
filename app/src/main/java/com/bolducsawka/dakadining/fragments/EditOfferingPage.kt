@@ -38,7 +38,6 @@ class EditOfferingPage : Fragment() {
     private lateinit var txtInputOfferingPrice: EditText
 
     private var commonCallbacks: CommonCallbacks? = null
-    private var callbacks: CreateNewOfferingPage.Callbacks? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +50,6 @@ class EditOfferingPage : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         commonCallbacks = context as CommonCallbacks
-        callbacks = context as CreateNewOfferingPage.Callbacks
     }
 
     override fun onCreateView(
@@ -77,7 +75,6 @@ class EditOfferingPage : Fragment() {
         }
 
         btnSubmitOffering.setOnClickListener {
-            //TODO: Update Offer
             val updateOfferLiveData: LiveData<ResponseObject<Offer>> = BackendFetcher.get().updateOffer(
                 Offer(
                     offer.offerID,
@@ -102,15 +99,14 @@ class EditOfferingPage : Fragment() {
         }
 
         btnDeleteOffer.setOnClickListener {
-            //TODO: Delete offer
             val deleteOfferLiveData: LiveData<ResponseObject<Offer>> = BackendFetcher.get().deleteOffer(offer)
 
             deleteOfferLiveData.observe(viewLifecycleOwner, Observer {
                 if(it.status == 200){
                     Toast.makeText(context, "Offering Deleted", Toast.LENGTH_SHORT).show()
+                    commonCallbacks?.onBack()
                 }else{
                     Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
-                    commonCallbacks?.onBack()
                 }
             })
 
@@ -123,7 +119,6 @@ class EditOfferingPage : Fragment() {
     override fun onDetach() {
         super.onDetach()
         commonCallbacks = null
-        callbacks = null
     }
 
     companion object{
