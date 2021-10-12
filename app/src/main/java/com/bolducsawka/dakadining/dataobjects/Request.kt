@@ -11,4 +11,4 @@ data class Request(
     var time: Date,
     val status: Boolean,
     val filledBy: String?,
-    val message: String?):Serializable, ResponseData
+    val message: String?):Serializable, ResponseData,SwipeObject

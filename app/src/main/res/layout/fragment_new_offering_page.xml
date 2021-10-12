@@ -13,7 +13,7 @@ tools:context=".fragments.CreateNewOfferingPage">
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/btnBack"
+            android:id="@+id/imgBack"
             android:layout_width="51dp"
             android:layout_height="57dp"
             android:cropToPadding="true"
@@ -41,7 +41,7 @@ tools:context=".fragments.CreateNewOfferingPage">
     android:layout_marginHorizontal="30dp">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtNumSwipes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
@@ -54,7 +54,7 @@ tools:context=".fragments.CreateNewOfferingPage">
         app:layout_constraintTop_toTopOf="@+id/txtInputNumSwipes" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtDateTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
@@ -77,7 +77,7 @@ tools:context=".fragments.CreateNewOfferingPage">
         app:layout_constraintBottom_toTopOf="@+id/txtInputOfferingPrice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/txtNumSwipes"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -98,7 +98,7 @@ tools:context=".fragments.CreateNewOfferingPage">
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom">
     <Button
-        android:id="@+id/btnSubmitOffering"
+        android:id="@+id/btnFulfillRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"

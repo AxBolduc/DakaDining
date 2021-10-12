@@ -67,7 +67,7 @@ class CreateNewRequestPage: Fragment() {
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_new_request_page, container, false)
 
-        btnBack = view.findViewById(R.id.btnBack)
+        btnBack = view.findViewById(R.id.imgBack)
         btnSubmitRequest = view.findViewById(R.id.btnSubmitRequest)
 
         txtInputNumSwipes = view.findViewById(R.id.txtInputNumSwipes)
@@ -88,10 +88,10 @@ class CreateNewRequestPage: Fragment() {
             datePicker = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
                 date.let {
                     it.year = year;
-                    it.month = month;
+                    it.month = month+1;
                     it.date = day
                 }
-                txtInputDate.setText("${month}/${day}/${year}")
+                txtInputDate.setText("${month+1}/${day}/${year}")
             }, year, month, day)
 
             datePicker.show()

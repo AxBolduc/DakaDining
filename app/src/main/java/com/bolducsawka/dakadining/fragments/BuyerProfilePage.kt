@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,7 +75,7 @@ class BuyerProfilePage : Fragment(){
         val view = inflater.inflate(R.layout.fragment_profile_buyer_page, container, false)
 
         btnLogout = view.findViewById(R.id.btnLogout)
-        btnBack = view.findViewById(R.id.btnBack)
+        btnBack = view.findViewById(R.id.imgBack)
         txtBuyerName = view.findViewById(R.id.txtBuyerName)
         imgProfilePic = view.findViewById(R.id.imgProfilePic)
 

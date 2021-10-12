@@ -25,7 +25,7 @@
         android:layout_marginHorizontal="30dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txtNumSwipes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
@@ -38,7 +38,7 @@
             app:layout_constraintTop_toTopOf="@+id/txtInputFirstName" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/txtDateTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
@@ -87,7 +87,7 @@
             android:textSize="10sp"
             app:layout_constraintBottom_toTopOf="@+id/txtInputLastName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/txtNumSwipes"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText

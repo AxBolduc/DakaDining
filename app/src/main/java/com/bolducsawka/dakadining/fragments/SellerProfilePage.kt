@@ -1,6 +1,5 @@
 package com.bolducsawka.dakadining.fragments
 
-import android.R.attr
 import android.app.Activity.RESULT_OK
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -29,14 +28,11 @@ import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
 import com.bolducsawka.dakadining.viewmodels.OfferListViewModel
-import android.R.attr.bitmap
 import android.util.Base64
-import android.util.Log
 import com.bolducsawka.dakadining.api.requestobjects.UpdatePictureRequest
 import com.bolducsawka.dakadining.api.responseobjects.UpdatePictureResponse
 import java.io.ByteArrayOutputStream
 import android.graphics.BitmapFactory
-import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.MutableLiveData
 import java.util.*
 
@@ -85,12 +81,11 @@ class SellerProfilePage : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        //Refresh instance of user
 
         val view = inflater.inflate(R.layout.fragment_profile_seller_page, container, false)
 
         btnLogout = view.findViewById(R.id.btnLogout)
-        btnBack = view.findViewById(R.id.btnBack)
+        btnBack = view.findViewById(R.id.imgBack)
         btnUseSwipe = view.findViewById(R.id.btnUseSwipe)
         txtSellerName = view.findViewById(R.id.txtSellerName)
         txtNumSwipes = view.findViewById(R.id.txtNumSwipes)

@@ -3,6 +3,7 @@ package com.bolducsawka.dakadining.fragments
 import android.content.Context
 import android.os.Bundle
 import android.telecom.Call
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,10 +20,12 @@ import com.bolducsawka.dakadining.api.BackendFetcher
 import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
 import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.dataobjects.Request
+import com.bolducsawka.dakadining.dataobjects.SwipeObject
 import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.viewmodels.OfferListViewModel
 
 private const val ARG_USER = "user"
+private const val TAG = "OffersPage"
 
 class OffersPage : Fragment() {
 
@@ -30,8 +33,8 @@ class OffersPage : Fragment() {
         fun swapPages(user: User, fromOffers: Boolean)
         fun onAdd(fromOffers:Boolean, userID: String)
         fun onProfile(user: User)
+        fun onObjectClick(userID: String, fromOffers: Boolean, swipeObject: SwipeObject)
     }
-
 
     private var offers: List<Offer> = mutableListOf()
 
@@ -106,7 +109,9 @@ class OffersPage : Fragment() {
         offerListViewModel.getOffers()
         offerListViewModel.offers?.observe(viewLifecycleOwner, Observer {
             if(it.status == 200){
-                offers = it.data.offers
+                offers = it.data.offers.filter {
+                    it.status
+                }
             }
 
             updateUI()
@@ -118,10 +123,23 @@ class OffersPage : Fragment() {
         offersRecyclerView.adapter = adapter
     }
 
-    private inner class OfferHolder(view: View): RecyclerView.ViewHolder(view){
+    private inner class OfferHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener{
         val txtNumOfSwipes: TextView = itemView.findViewById(R.id.txtNumOfSwipes)
         val txtRequestPrice: TextView = itemView.findViewById(R.id.txtRequestPrice)
         val txtRequestDateTime: TextView = itemView.findViewById(R.id.txtRequestDateTime)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        var heldOffer: Offer? = null;
+
+
+        override fun onClick(p0: View?) {
+            if(user.role == "Buyer"){
+                heldOffer?.let { callbacks?.onObjectClick(user.userID, true, it) }
+            }
+        }
     }
 
     private inner class OfferAdapter(var offers: List<Offer>): RecyclerView.Adapter<OfferHolder>(){
@@ -136,7 +154,7 @@ class OffersPage : Fragment() {
                 txtNumOfSwipes.setText("${offer.meals.toString()} swipes")
                 txtRequestPrice.setText(offer.price.toString())
                 txtRequestDateTime.setText("")
-
+                heldOffer = offer
             }
         }
 

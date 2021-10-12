@@ -7,4 +7,4 @@ data class Offer(
     var meals: Int,
     var price: Int,
     var status: Boolean,
-    var takenBy: String?): ResponseData
+    var takenBy: String?): ResponseData, SwipeObject

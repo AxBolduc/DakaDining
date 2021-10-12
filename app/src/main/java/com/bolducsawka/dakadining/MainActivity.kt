@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.bolducsawka.dakadining.api.BackendFetcher
 import com.bolducsawka.dakadining.dataobjects.Offer
+import com.bolducsawka.dakadining.dataobjects.SwipeObject
 import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.fragments.*
 import com.bolducsawka.dakadining.navigation.CommonCallbacks
@@ -112,6 +113,20 @@ class MainActivity : AppCompatActivity(), LoginPage.Callbacks, CreateProfilePage
 
         val fragment = LoginPage.newInstance()
         supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
+    }
+
+    override fun onObjectClick(userID: String, fromOffers: Boolean, swipeObject: SwipeObject) {
+        var fragment: Fragment?= null
+        if(fromOffers){
+            fragment = PurchaseOfferingPage.newInstance(userID, swipeObject)
+        }else{
+            fragment = FulfillRequestPage.newInstance(userID, swipeObject)
+        }
+
+        supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
             .replace(R.id.fragment_container, fragment)
             .commit()
     }

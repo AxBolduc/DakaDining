@@ -13,7 +13,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/btnBack"
+            android:id="@+id/imgBack"
             android:layout_width="51dp"
             android:layout_height="57dp"
             android:cropToPadding="true"
@@ -78,7 +78,7 @@
             tools:layout_editor_absoluteX="-16dp" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txtOutgoingOffers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
@@ -98,7 +98,7 @@
             app:layout_constraintBottom_toTopOf="@+id/btnUseSwipe"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/txtOutgoingOffers" />
 
         <Button
             android:id="@+id/btnUseSwipe"

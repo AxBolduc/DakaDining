@@ -59,8 +59,8 @@ class CreateNewOfferingPage : Fragment() {
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_new_offering_page, container, false)
 
-        btnBack = view.findViewById(R.id.btnBack)
-        btnSubmitOffering = view.findViewById(R.id.btnSubmitOffering)
+        btnBack = view.findViewById(R.id.imgBack)
+        btnSubmitOffering = view.findViewById(R.id.btnFulfillRequest)
 
         txtInputNumSwipes = view.findViewById(R.id.txtInputNumSwipes)
         txtInputOfferingPrice = view.findViewById(R.id.txtInputOfferingPrice)

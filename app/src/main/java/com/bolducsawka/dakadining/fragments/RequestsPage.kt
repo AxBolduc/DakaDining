@@ -2,6 +2,7 @@ package com.bolducsawka.dakadining.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,11 +17,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bolducsawka.dakadining.R
 import com.bolducsawka.dakadining.api.BackendFetcher
 import com.bolducsawka.dakadining.api.responseobjects.ResponseObject
+import com.bolducsawka.dakadining.dataobjects.Offer
 import com.bolducsawka.dakadining.dataobjects.Request
 import com.bolducsawka.dakadining.dataobjects.User
 import com.bolducsawka.dakadining.viewmodels.RequestListViewModel
 
 private const val ARG_USER = "user"
+private const val TAG = "RequestsPage"
 
 class RequestsPage : Fragment() {
 
@@ -96,7 +99,9 @@ class RequestsPage : Fragment() {
         requestListViewModel.getRequests()
         requestListViewModel.requests?.observe(viewLifecycleOwner, Observer {
             if(it.status == 200){
-                requests = it.data.requests
+                requests = it.data.requests.filter {
+                    !it.status
+                }
             }
 
             updateUI()
@@ -108,10 +113,21 @@ class RequestsPage : Fragment() {
         requestsRecyclerView.adapter = adapter
     }
 
-    private inner class RequestHolder(view: View): RecyclerView.ViewHolder(view){
+    private inner class RequestHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener{
         val txtNumOfSwipes: TextView = itemView.findViewById(R.id.txtNumOfSwipes)
         val txtRequestPrice: TextView = itemView.findViewById(R.id.txtRequestPrice)
         val txtRequestDateTime: TextView = itemView.findViewById(R.id.txtRequestDateTime)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        var heldRequest: Request? = null
+
+        override fun onClick(p0: View?) {
+            heldRequest?.let { callbacks?.onObjectClick(user.userID, false, it) }
+            Log.d(TAG, "Clicked")
+        }
     }
 
     private inner class RequestAdapter(var crimes: List<Request>): RecyclerView.Adapter<RequestHolder>(){
@@ -126,6 +142,8 @@ class RequestsPage : Fragment() {
                 txtNumOfSwipes.setText("${request.meals.toString()} swipes")
                 txtRequestPrice.setText(request.price.toString())
                 txtRequestDateTime.setText(request.time.time.toString())
+
+                heldRequest = request
 
             }
         }

@@ -13,7 +13,7 @@ tools:context=".fragments.FulfillRequestPage">
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/btnBack"
+            android:id="@+id/imgBack"
             android:layout_width="51dp"
             android:layout_height="57dp"
             android:cropToPadding="true"
@@ -41,7 +41,7 @@ tools:context=".fragments.FulfillRequestPage">
     android:layout_marginHorizontal="30dp">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtNumSwipes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
@@ -54,7 +54,7 @@ tools:context=".fragments.FulfillRequestPage">
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtDateTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -65,10 +65,10 @@ tools:context=".fragments.FulfillRequestPage">
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNumSwipes" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/txtReqPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -80,7 +80,7 @@ tools:context=".fragments.FulfillRequestPage">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDateTime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -90,7 +90,7 @@ tools:context=".fragments.FulfillRequestPage">
         android:layout_gravity="center|bottom">
 
         <Button
-            android:id="@+id/btnSubmitOffering"
+            android:id="@+id/btnFulfillRequest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
