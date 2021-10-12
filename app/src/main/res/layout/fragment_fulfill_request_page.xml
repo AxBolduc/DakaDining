@@ -28,7 +28,7 @@ tools:context=".fragments.FulfillRequestPage">
         android:layout_gravity="center|top"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/montserrat"
-        android:text="Fulfill Request"
+        android:text="@string/fulfill_request"
         android:textColor="#000"
         android:textSize="40sp"
         android:textStyle="bold" />
@@ -98,7 +98,7 @@ tools:context=".fragments.FulfillRequestPage">
             android:fontFamily="@font/montserrat"
             android:paddingHorizontal="60dp"
             android:paddingVertical="10dp"
-            android:text="Fulfill Request"
+            android:text="@string/fulfill_request"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>

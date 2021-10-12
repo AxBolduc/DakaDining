@@ -29,6 +29,18 @@
     <string name="txtUseSwipe">Swipe Used</string>
     <string name="txtDate">Date</string>
     <string name="txtPrice">Price</string>
+    <string name="edit_offer">Edit Offer</string>
+    <string name="delete_offer">Delete offer</string>
+    <string name="edit_request">Edit Request</string>
+    <string name="delete_request">Delete Request</string>
+    <string name="fulfill_request">Fulfill Request</string>
+    <string name="fulfill_request">Fulfill Request</string>
+    <string name="name">Name</string>
+    <string name="swipes_left"># Swipes Left</string>
+    <string name="name">Name</string>
+    <string name="purchase_offering">Purchase Offering</string>
+    <string name="accept_offer">Accept Offer</string>
+    <string name="requests">Requests</string>
 
 
     <string-array name="arrMealPlans">

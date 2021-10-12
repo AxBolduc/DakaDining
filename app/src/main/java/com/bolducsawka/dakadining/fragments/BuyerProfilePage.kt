@@ -81,6 +81,8 @@ class BuyerProfilePage : Fragment(){
         txtBuyerName = view.findViewById(R.id.txtBuyerName)
         imgProfilePic = view.findViewById(R.id.imgProfilePic)
 
+
+        //Decodes the image's base64 string back to a bitmap
         user.profilePic?.let {
             val decodedString: ByteArray = Base64.decode(it, Base64.DEFAULT)
             val decodedByte: Bitmap= BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
@@ -97,7 +99,7 @@ class BuyerProfilePage : Fragment(){
             callbacks?.onBack()
         }
 
-        //Populate Name fields
+        //Populate Name field
         txtBuyerName.text = "${user.firstName} ${user.lastName}"
 
 

@@ -28,7 +28,7 @@ tools:context=".fragments.PurchaseOfferingPage">
         android:layout_gravity="center|top"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/montserrat"
-        android:text="Purchase Offering"
+        android:text="@string/purchase_offering"
         android:textColor="#000"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -83,7 +83,7 @@ tools:context=".fragments.PurchaseOfferingPage">
             android:fontFamily="@font/montserrat"
             android:paddingHorizontal="60dp"
             android:paddingVertical="10dp"
-            android:text="Accept Offer"
+            android:text="@string/accept_offer"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>

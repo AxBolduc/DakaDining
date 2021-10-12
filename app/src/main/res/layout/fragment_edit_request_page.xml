@@ -137,7 +137,7 @@
         android:layout_gravity="center|top"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/montserrat"
-        android:text="Edit Request"
+        android:text="@string/edit_request"
         android:textColor="#000"
         android:textSize="40sp"
         android:textStyle="bold" />
@@ -156,7 +156,7 @@
             android:fontFamily="@font/montserrat"
             android:paddingHorizontal="60dp"
             android:paddingVertical="10dp"
-            android:text="Delete Request"
+            android:text="@string/delete_request"
             android:textSize="15sp"
             android:textStyle="bold" />
 

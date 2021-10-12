@@ -28,7 +28,7 @@ tools:context=".fragments.EditOfferingPage">
         android:layout_gravity="center|top"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/montserrat"
-        android:text="Edit Offer"
+        android:text="@string/edit_offer"
         android:textColor="#000"
         android:textSize="40sp"
         android:textStyle="bold" />
@@ -107,7 +107,7 @@ tools:context=".fragments.EditOfferingPage">
             android:fontFamily="@font/montserrat"
             android:paddingHorizontal="60dp"
             android:paddingVertical="10dp"
-            android:text="Delete offer"
+            android:text="@string/delete_offer"
             android:textSize="15sp"
             android:textStyle="bold" />
 

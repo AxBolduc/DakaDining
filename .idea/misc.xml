@@ -12,9 +12,12 @@
         <entry key="app/src/main/res/layout/fragment_login_page.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_new_offering_page.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_new_request_page.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_offers_page.xml" value="0.2418478260869565" />
         <entry key="app/src/main/res/layout/fragment_profile_buyer_page.xml" value="0.3635897435897436" />
         <entry key="app/src/main/res/layout/fragment_profile_seller_page.xml" value="0.290625" />
         <entry key="app/src/main/res/layout/fragment_purchase_offering.xml" value="0.24682971014492755" />
+        <entry key="app/src/main/res/layout/fragment_requests_page.xml" value="0.2418478260869565" />
+        <entry key="app/src/main/res/layout/list_item_request.xml" value="0.2418478260869565" />
         <entry key="app/src/main/res/xml/files.xml" value="0.16944444444444445" />
       </map>
     </option>
