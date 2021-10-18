@@ -1,6 +1,6 @@
 # DakaDining
 A native Android app written in Kotlin to help facilitate students at WPI to trade meal swipes. 
-Assignment done through **pairs programming**.
+Assignment done through **pair programming**.
 
 ## Task ID | Demonstration of Completion
 (1) See Canvas submission for Checkpoint PDF
